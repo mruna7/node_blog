@@ -1,0 +1,68 @@
+<div class="container-fluid">
+
+	<div class="block-header">
+		<div class="row">
+			<div class="col-lg-5 col-md-8 col-sm-12">
+				<h2>
+					<a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth" (click)="toggleFullWidth()">
+						<i class="fa fa-arrow-left" *ngIf="sidebarVisible"></i>
+						<i class="fa fa-arrow-right" *ngIf="!sidebarVisible"></i>
+					</a>
+					Review Blogs
+				</h2>
+				<ul class="breadcrumb">
+					<li class="breadcrumb-item"><a [routerLink]="['/admin']"><i class="icon-home"></i></a></li>
+					<li class="breadcrumb-item">Admin</li>
+					<li class="breadcrumb-item active">Review Blogs</li>
+				</ul>
+			</div>
+            <div class="col-lg-7 col-md-4 col-sm-12 text-right">
+               
+            </div>
+		</div>
+	</div>
+
+	<div class="row clearfix">
+		<div class="col-lg-12 col-md-12">
+			<div class="card">
+				<div class="body project_report">
+					<div class="table-responsive">
+						<table class="table m-b-0 table-hover">
+							<thead class="thead-light">
+								<tr>
+									<th>Blog Status</th>
+									<th>Blog Summary</th>									
+									<th>Created By</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let blog of blogsList; let i = index">
+									<td>
+										<span class="badge badge-success" *ngIf='blog.isVerified == "true"'>Active</span>
+										<span class="badge badge-default" *ngIf='blog.isVerified == "false"'>InActive</span>
+									</td>
+									<td class="project-title">
+										<h6><a href="javascript:void(0);">{{blog.summary}}</a></h6>
+										<small>{{blog.createdDate| date: 'dd/MM/yyyy'}}</small>
+									</td>
+									
+									<td>
+										<ul class="list-unstyled team-info">
+											<li>{{blog.emailAddress}}</li>
+										</ul>
+									</td>
+									<td class="project-actions">
+										<a (click)="approveBlog(blog.postId)" href="javascript:void(0);" class="btn btn-outline-secondary mr-1">Aprove</a>
+										<!-- <a href="javascript:void(0);" class="btn btn-outline-secondary"><i class="icon-pencil"></i>Approve</a> -->
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
