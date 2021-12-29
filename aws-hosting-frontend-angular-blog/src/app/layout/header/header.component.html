@@ -1,0 +1,60 @@
+<nav class="navbar navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-btn">
+            <button type="button" class="btn-toggle-offcanvas" (click)="toggleSideMenu()"><i
+                    class="lnr lnr-menu fa fa-bars"></i></button>
+        </div>
+
+        <div class="navbar-brand">
+            <a *ngIf="!darkClass"><img style="width:150px" src="assets/images/logo.png" alt="CEP-LOGO"
+                    class="img-responsive logo"></a>
+            <a *ngIf="darkClass"><img src="assets/images/logo.png" alt="CEP-LOGO" class="img-responsive logo"></a>
+        </div>
+
+        <div class="navbar-right">
+            <div id="navbar-menu">
+                <ul class="nav navbar-nav">
+
+                    <li>
+                        <div *ngIf="isloggedIn">
+
+                            <!-- <p>{{login_user_name}}</p> -->
+
+                            &nbsp;&nbsp;&nbsp;
+                            <!-- <a aria-label="Angular on twitter" style="color: #1c1c1d;" rel="noopener" href="/signout" title="signout">
+                              Sign Out
+                            </a> -->
+                            <div class="dropdown" ngbDropdown>
+                                <span>Welcome,</span>
+                                <a href="javascript:void(0);" class="dropdown-toggle user-name"
+                                    ngbDropdownToggle><strong>{{login_user_name}}</strong></a>
+                                <ul class="dropdown-menu dropdown-menu-right account" ngbDropdownMenu>
+                                    <!-- <li><a [routerLink]="['/admin/pages/page-profile2']"><i class="icon-user"></i>My Profile</a></li>
+                                    <li><a [routerLink]="['/admin/app/app-inbox']"><i class="icon-envelope-open"></i>Messages</a></li>
+                                    <li><a href="javascript:void(0);"><i class="icon-settings"></i>Settings</a></li>
+                                    <li class="divider"></li> -->
+                                    <li><a [routerLink]="['/signout']"><i class="icon-power"></i>Sign Out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- https://d25wadk4b1jy9q.cloudfront.net/signup -->
+                        <div *ngIf="!isloggedIn">
+                            <a aria-label="Angular on twitter" style="color: #1c1c1d;" rel="noopener"
+                                href="https://cep-blog.auth.us-east-1.amazoncognito.com/signup?client_id=1smbpa19s5mq1ee3f5ff3c5d32&response_type=token&scope=phone+email+openid+aws.cognito.signin.user.admin+profile&redirect_uri=https://d25wadk4b1jy9q.cloudfront.net/signup"
+                                title="Register">
+                                SignUp
+                            </a>
+                            &nbsp;&nbsp;&nbsp;
+                            <a aria-label="Angular on twitter" style="color: #1c1c1d;" rel="noopener"
+                                href="https://cep-blog.auth.us-east-1.amazoncognito.com/login?client_id=1smbpa19s5mq1ee3f5ff3c5d32&response_type=token&scope=phone+email+openid+aws.cognito.signin.user.admin+profile&redirect_uri=https://d25wadk4b1jy9q.cloudfront.net/signin"
+                                title="Login">
+                                SignIn
+                            </a>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
