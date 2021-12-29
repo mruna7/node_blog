@@ -1,4 +1,4 @@
-service: CEP-a72-userpool
+service: CEP-a72-casestudy
 
 provider:
   name: aws
@@ -6,6 +6,7 @@ provider:
   stage: dev
   region: us-east-1
   profile: cep
+  #vpc: ${file(vpc_setting.yml):${self:provider.stage}}
 
 # functions:
   # cloudFormationCustomUserPool:
@@ -21,42 +22,43 @@ provider:
   #         trigger: PostConfirmation
 
 resources:
-    # CustomUserPoolRole:
-    #   Type: AWS::IAM::Role
-    #   Properties:
-    #     RoleName: ${self:service}-${self:provider.stage}-custom-user-pool-role
-    #     AssumeRolePolicyDocument:
-    #       Version: '2012-10-17'
-    #       Statement:
-    #         - Effect: Allow
-    #           Principal:
-    #             Service:
-    #               - lambda.amazonaws.com
-    #           Action: sts:AssumeRole
-    #     Policies:
-    #       - PolicyName: ${self:service}-${self:provider.stage}-custom-user-pool-policy
-    #         PolicyDocument:
-    #           Version: '2012-10-17'
-    #           Statement:
-    #             - Effect: Allow
-    #               Action:
-    #                 - logs:CreateLogStream
-    #                 - logs:PutLogEvents
-    #               Resource: 
-    #                 - 'Fn::Join':
-    #                   - ':'
-    #                   -
-    #                     - 'arn:aws:logs'
-    #                     - Ref: 'AWS::Region'
-    #                     - Ref: 'AWS::AccountId'
-    #                     - 'log-group:/aws/lambda/*:*:*'
-    #             - Effect: Allow
-    #               Action:
-    #                 - cognito-idp:CreateUserPool
-    #                 - cognito-idp:DeleteUserPool
-    #                 - cognito-idp:UpdateUserPool
-    #                 - cognito-idp:DescribeUserPool
-    #               Resource: '*'
+  Resources:
+    CustomUserPoolRole:
+      Type: AWS::IAM::Role
+      Properties:
+        RoleName: ${self:service}-${self:provider.stage}-custom-user-pool-role
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+              Action: sts:AssumeRole
+        Policies:
+          - PolicyName: ${self:service}-${self:provider.stage}-custom-user-pool-policy
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - logs:CreateLogStream
+                    - logs:PutLogEvents
+                  Resource: 
+                    - 'Fn::Join':
+                      - ':'
+                      -
+                        - 'arn:aws:logs'
+                        - Ref: 'AWS::Region'
+                        - Ref: 'AWS::AccountId'
+                        - 'log-group:/aws/lambda/*:*:*'
+                - Effect: Allow
+                  Action:
+                    - cognito-idp:CreateUserPool
+                    - cognito-idp:DeleteUserPool
+                    - cognito-idp:UpdateUserPool
+                    - cognito-idp:DescribeUserPool
+                  Resource: '*'
 
     CognitoUserPoolUserPool:
       Type: "AWS::Cognito::UserPool"

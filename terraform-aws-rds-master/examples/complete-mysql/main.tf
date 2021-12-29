@@ -1,10 +1,11 @@
 provider "aws" {
   region = local.region
+  profile = "cep"
 }
 
 locals {
-  name   = "complete-mysql"
-  region = "eu-west-1"
+  name   = "cep-a72-mysql"
+  region = "us-east-1"
   tags = {
     Owner       = "user"
     Environment = "dev"
@@ -68,33 +69,30 @@ module "db" {
   engine_version       = "8.0.20"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
-  instance_class       = "db.t3.large"
+  instance_class       = "db.t2.micro"
 
   allocated_storage     = 20
   max_allocated_storage = 100
   storage_encrypted     = false
 
-  name     = "completeMysql"
-  username = "complete_mysql"
-  password = "YourPwdShouldBeLongAndSecure!"
+  name     = "cepa72"
+  username = "a72_mysql"
+  password = "cepa72Batch4"
   port     = 3306
 
-  multi_az               = true
+  multi_az               = false
   subnet_ids             = module.vpc.database_subnets
   vpc_security_group_ids = [module.security_group.security_group_id]
 
-  maintenance_window              = "Mon:00:00-Mon:03:00"
-  backup_window                   = "03:00-06:00"
   enabled_cloudwatch_logs_exports = ["general"]
 
   backup_retention_period = 0
   skip_final_snapshot     = true
   deletion_protection     = false
 
-  performance_insights_enabled          = true
+  performance_insights_enabled          = false
   performance_insights_retention_period = 7
-  create_monitoring_role                = true
-  monitoring_interval                   = 60
+  create_monitoring_role                = false
 
   parameters = [
     {
@@ -120,49 +118,4 @@ module "db" {
   db_subnet_group_tags = {
     "Sensitive" = "high"
   }
-}
-
-module "db_default" {
-  source = "../../"
-
-  identifier = "${local.name}-default"
-
-  create_db_option_group    = false
-  create_db_parameter_group = false
-
-  # All available versions: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
-  engine               = "mysql"
-  engine_version       = "8.0.20"
-  family               = "mysql8.0" # DB parameter group
-  major_engine_version = "8.0"      # DB option group
-  instance_class       = "db.t3.large"
-
-  allocated_storage = 20
-
-  name                   = "completeMysql"
-  username               = "complete_mysql"
-  create_random_password = true
-  random_password_length = 12
-  port                   = 3306
-
-  subnet_ids             = module.vpc.database_subnets
-  vpc_security_group_ids = [module.security_group.security_group_id]
-
-  maintenance_window = "Mon:00:00-Mon:03:00"
-  backup_window      = "03:00-06:00"
-
-  backup_retention_period = 0
-
-  tags = local.tags
-}
-
-module "db_disabled" {
-  source = "../../"
-
-  identifier = "${local.name}-disabled"
-
-  create_db_instance        = false
-  create_db_subnet_group    = false
-  create_db_parameter_group = false
-  create_db_option_group    = false
 }
