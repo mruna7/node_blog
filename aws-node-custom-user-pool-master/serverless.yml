@@ -1,23 +1,25 @@
-service: custom-user-pool
+service: CEP-a72-casestudy
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs12.x
   stage: dev
-  region: us-east-2
+  region: us-east-1
+  profile: cep
+  #vpc: ${file(vpc_setting.yml):${self:provider.stage}}
 
-functions:
-  cloudFormationCustomUserPool:
-    handler: cloudFormationCustomUserPool.handler
-    role: CustomUserPoolRole
-    timeout: 300
+# functions:
+  # cloudFormationCustomUserPool:
+  #   handler: cloudFormationCustomUserPool.handler
+  #   role: CustomUserPoolRole
+  #   timeout: 300
 
-  postConfirmation:
-    handler: postConfirmation.handler
-    events:
-      - cognitoUserPool:
-          pool: UserPool
-          trigger: PostConfirmation
+  # postConfirmation:
+  #   handler: postConfirmation.handler
+  #   events:
+  #     - cognitoUserPool:
+  #         pool: UserPool
+  #         trigger: PostConfirmation
 
 resources:
   Resources:
@@ -59,44 +61,71 @@ resources:
                   Resource: '*'
 
     CognitoUserPoolUserPool:
-      Type: "Custom::UserPool"
-      Version: "1.0"
-      DependsOn: CloudFormationCustomUserPoolLambdaFunction
+      Type: "AWS::Cognito::UserPool"
       Properties:
-        ServiceToken: 
-          Fn::GetAtt: [ "CloudFormationCustomUserPoolLambdaFunction", "Arn" ]
-        Region:
-          Ref: AWS::Region
-        AccountId:
-          Ref: AWS::AccountId
-        PoolProperties:
-          PoolName: ${self:service}-${self:provider.stage}-UserPool
-          MfaConfiguration: OFF
-          VerificationMessageTemplate:
-            DefaultEmailOption: "CONFIRM_WITH_CODE"
-          AdminCreateUserConfig:
-            UnusedAccountValidityDays: 7 
-            AllowAdminCreateUserOnly: false
-          AutoVerifiedAttributes:
-            - email
-          Policies:
-            PasswordPolicy:
-              RequireLowercase: true
-              RequireSymbols: true
-              RequireNumbers: true
-              MinimumLength: 8
-              RequireUppercase: true
-          UsernameAttributes:
-            - email
-          Schema:
-            - Name: name
-              AttributeDataType: String
-              Mutable: true
-              Required: true
-            - Name: email
-              AttributeDataType: String
-              Mutable: false
-              Required: true
+        UserPoolName: ${self:provider.stage}-${self:service}
+        MfaConfiguration: OFF
+        AdminCreateUserConfig:
+          AllowAdminCreateUserOnly: false
+        Policies:
+          PasswordPolicy:
+            RequireLowercase: false
+            RequireSymbols: true
+            RequireNumbers: true
+            MinimumLength: 8
+            RequireUppercase: false
+            TemporaryPasswordValidityDays: 7
+        UsernameAttributes:
+          - email
+        Schema:
+          - Name: name
+            AttributeDataType: String
+            Mutable: true
+            Required: true
+          - Name: email
+            AttributeDataType: String
+            Mutable: false
+            Required: false
+
+    # CognitoUserPoolUserPool:
+    #   Type: "Custom::UserPool"
+    #   Version: "1.0"
+    #   DependsOn: CloudFormationCustomUserPoolLambdaFunction
+    #   Properties:
+    #     ServiceToken: 
+    #       Fn::GetAtt: [ "CloudFormationCustomUserPoolLambdaFunction", "Arn" ]
+    #     Region:
+    #       Ref: AWS::Region
+    #     AccountId:
+    #       Ref: AWS::AccountId
+    #     PoolProperties:
+    #       PoolName: ${self:service}-${self:provider.stage}-UserPool
+    #       MfaConfiguration: OFF
+    #       VerificationMessageTemplate:
+    #         DefaultEmailOption: "CONFIRM_WITH_CODE"
+    #       AdminCreateUserConfig:
+    #         UnusedAccountValidityDays: 7 
+    #         AllowAdminCreateUserOnly: false
+    #       AutoVerifiedAttributes:
+    #         - email
+    #       Policies:
+    #         PasswordPolicy:
+    #           RequireLowercase: true
+    #           RequireSymbols: true
+    #           RequireNumbers: true
+    #           MinimumLength: 8
+    #           RequireUppercase: true
+    #       UsernameAttributes:
+    #         - email
+    #       Schema:
+    #         - Name: name
+    #           AttributeDataType: String
+    #           Mutable: true
+    #           Required: true
+    #         - Name: email
+    #           AttributeDataType: String
+    #           Mutable: false
+    #           Required: true
 
     CognitoUserPoolClientUserPoolClient:
       Type: "AWS::Cognito::UserPoolClient"
