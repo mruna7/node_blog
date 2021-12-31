@@ -1,0 +1,23 @@
+getUserById:
+  handler: handler.getUserById
+  events:
+    - http:
+        method: get
+        path: ${self:custom.apiVersion}/getuser/{userId}
+        cors: ${self:custom.config.cors}
+        request:
+            parameters:
+              paths:
+                userId: true
+preSignUp:
+  handler: handler.preSignUpTrigger
+  events:
+    - cognitoUserPool:
+        pool: UserPool
+        trigger: PreSignUp
+postConfirmation:
+  handler: handler.postConfirmationTrigger
+  events:
+    - cognitoUserPool:
+        pool: UserPool
+        trigger: PostConfirmation
