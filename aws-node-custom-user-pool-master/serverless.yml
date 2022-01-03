@@ -6,10 +6,15 @@ provider:
   stage: dev
   region: us-east-1
   profile: cep
+  environment:
+    ENV: dev
   #vpc: ${file(vpc_setting.yml):${self:provider.stage}}
 
+custom:
+  config : ${file(./serverless.config.yml)}
+
 functions:
-  - ${file(serverless_functions.yml)}
+  - ${file(serverless.functions.yml)}
 
 resources:
   Resources:
@@ -74,3 +79,7 @@ resources:
     UserPoolClientId:
       Value:
         Ref: CognitoUserPoolClientUserPoolClient
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
