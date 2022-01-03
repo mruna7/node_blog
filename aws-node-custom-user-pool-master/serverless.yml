@@ -8,13 +8,8 @@ provider:
   profile: cep
   #vpc: ${file(vpc_setting.yml):${self:provider.stage}}
 
-# functions:
-  # postConfirmation:
-  #   handler: postConfirmation.handler
-  #   events:
-  #     - cognitoUserPool:
-  #         pool: UserPool
-  #         trigger: PostConfirmation
+functions:
+  - ${file(serverless_functions.yml)}
 
 resources:
   Resources:

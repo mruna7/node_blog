@@ -1,0 +1,10 @@
+dev:
+  securityGroupIds:
+    - sg-0f0ac4f8494f13bd1
+  subnetIds:
+    - subnet-0966c1e298928cf78
+    - subnet-0f25fa3db4f749fdd
+    - subnet-0d537202df60bc510
+    - subnet-076ee4181128215dc
+    - subnet-0d34ebfcbd3d9490e
+    - subnet-08d4497cddce20f26
