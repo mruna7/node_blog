@@ -3,7 +3,7 @@ getUserById:
   events:
     - http:
         method: get
-        path: ${self:custom.apiVersion}/getuser/{userId}
+        path: /getuser/{userId}
         cors: ${self:custom.config.cors}
         request:
             parameters:
@@ -21,3 +21,10 @@ postConfirmation:
     - cognitoUserPool:
         pool: UserPool
         trigger: PostConfirmation
+
+createdb:
+  handler: handler.createdb
+  events:
+    - http:
+        method: get
+        path: /createdb
