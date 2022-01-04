@@ -8,20 +8,33 @@ provider:
   profile: cep
   environment:
     ENV: dev
+  stackTags:
+    Group: CEP4-A72
+    Name Initials: RG
+    Purpose: "Case study"
+  tags:
+    Group: CEP4-A72
+    Name Initials: RG
+    Purpose: "Case study"
+  deploymentBucket:
+    tags:
+      Group: CEP4-A72
+      Name Initials: RG
+      Purpose: "Case study"
   #vpc: ${file(vpc_setting.yml):${self:provider.stage}}
 
 custom:
   config : ${file(./serverless.config.yml)}
 
-functions:
-  - ${file(serverless.functions.yml)}
+# functions:
+#   - ${file(serverless.functions.yml)}
 
 resources:
   Resources:
     CognitoUserPoolUserPool:
       Type: "AWS::Cognito::UserPool"
       Properties:
-        UserPoolName: ${self:provider.stage}-${self:service}
+        UserPoolName: rg-${self:provider.stage}-${self:service}
         VerificationMessageTemplate:
           DefaultEmailOption: CONFIRM_WITH_LINK
         EmailVerificationSubject: 'Your Verification Link'
@@ -50,11 +63,15 @@ resources:
             AttributeDataType: String
             Mutable: false
             Required: false
+        UserPoolTags:
+          Group: CEP4-A72
+          Name Initials: RG
+          Purpose: "Case study"
 
     CognitoUserPoolClientUserPoolClient:
       Type: "AWS::Cognito::UserPoolClient"
       Properties:
-        ClientName: ${self:service}-${self:provider.stage}-UserPoolClient
+        ClientName: rg-${self:service}-${self:provider.stage}-UserPoolClient
         UserPoolId:
           Ref: CognitoUserPoolUserPool
         ExplicitAuthFlows:
@@ -70,7 +87,7 @@ resources:
       Type: AWS::Cognito::UserPoolDomain 
       Properties:
         UserPoolId: !Ref CognitoUserPoolUserPool 
-        Domain: ${self:provider.stage}-${self:service}
+        Domain: rg-${self:provider.stage}-${self:service}
 
   Outputs:
     UserPoolId:
@@ -82,4 +99,3 @@ resources:
 
 plugins:
   - serverless-offline
-  - serverless-webpack
