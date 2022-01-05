@@ -1,6 +1,10 @@
 import { EntityBase } from './base';
 import { Model, DataTypes, BuildOptions } from 'sequelize';
 import { sequelize } from './';
+import { count } from 'console';
+import { isDeepStrictEqual } from 'util';
+import { getUserById } from '../controller/user';
+import { createPoolCluster } from 'mysql2';
 
 export interface PostAction extends EntityBase {
     // First Name of the user

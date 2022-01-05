@@ -40,6 +40,31 @@ Then create and confirm a user. Note, please change the email address below to y
 ```bash
 aws cognito-idp sign-up --region us-east-2 --client-id ${UserPoolClientId} --username your@email.address.com --password Passw0rd! --user-attributes Name="name",Value="Your Name"
 aws cognito-idp admin-confirm-sign-up --region us-east-2  --user-pool-id ${UserPoolId} --username your@email.address.com
+
+INSERT INTO users (id,name,email,emailVerified,userType,currentState,createdAt,updatedAt) VALUES ('fd82ef9d-bcbf-4132-9943-d8d8eba390ec','Mrunal Vartak','mrunal.vartak@impetus.com','true','Blogger','Active','2021-09-28 08:44:11.144','2021-09-28 08:50:14.362');
+
+lambdas:-
+getPostAction
+createPost 
+getallpost 
+getuser 
+getpostbyuserid
+updatepostId
+
+
+//deletepost soft delete
+
+api getallpost 
+3 read post,user and postA
+loop postid user postA count 
+return {
+    {
+        id post
+        count like
+        count dislike
+    }
+}
+
 ```
 
 The postConfirmation lambda will have executed when the user was confirmed. To verify it executed go to the AWS web console and navigate to the CloudWatch Logs for the lambda at /aws/lambda/custom-user-pool-dev-postConfirmation. There should be a log message similar to:
