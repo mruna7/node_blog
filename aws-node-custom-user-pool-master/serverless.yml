@@ -1,4 +1,4 @@
-service: cep-a72-casestudy
+service: RiddhiG-cep4-a72
 
 provider:
   name: aws
@@ -26,8 +26,8 @@ provider:
 custom:
   config : ${file(./serverless.config.yml)}
 
-# functions:
-#   - ${file(serverless.functions.yml)}
+functions:
+  - ${file(serverless.functions.yml)}
 
 resources:
   Resources:
@@ -87,7 +87,7 @@ resources:
       Type: AWS::Cognito::UserPoolDomain 
       Properties:
         UserPoolId: !Ref CognitoUserPoolUserPool 
-        Domain: rg-${self:provider.stage}-${self:service}
+        Domain: rg-${self:provider.stage}-domain
 
   Outputs:
     UserPoolId:
@@ -99,3 +99,4 @@ resources:
 
 plugins:
   - serverless-offline
+  - serverless-webpack

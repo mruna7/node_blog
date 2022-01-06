@@ -28,3 +28,18 @@ createdb:
     - http:
         method: get
         path: /createdb
+
+getAllUser:
+  handler: handler.getAllUser
+  events:
+    - http:
+        method: get
+        path: /getAllUser
+
+getAllPost:
+  handler: handler.getAllPost
+  events:
+    - http:
+        method: get
+        path: /getAllPost
+        
