@@ -1,6 +1,8 @@
 import { EntityBase } from './base';
 import { Model, DataTypes, BuildOptions } from 'sequelize';
 import { sequelize } from './';
+import User from './user';
+import PostAction from './postAction';
 
 export interface Post extends EntityBase {
     // First Name of the user
@@ -50,5 +52,6 @@ const Post = < PostStatic ><unknown>sequelize.define('Post', {
     }
 });
 
+Post.hasMany(PostAction);
 
 export default Post;

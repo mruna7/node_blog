@@ -1,4 +1,5 @@
 import * as userController from './controller/user';
+import * as postController from './controller/post';
 import * as signupController from './controller/signup';
 import * as createdbController from './controller/createdb';
 import { APIGatewayProxyHandler } from 'aws-lambda';
@@ -17,4 +18,12 @@ export const postConfirmationTrigger = async (event, _context) => {
 
 export const createdb = async (event, _context) => {
     return createdbController.createdb(event, _context);
+}
+
+export const getAllUser: APIGatewayProxyHandler = async (event, _context) => {
+    return userController.getAllUser(event, _context);
+}
+
+export const getAllPost: APIGatewayProxyHandler = async (event, _context) => {
+    return postController.getAllPost(event, _context);
 }

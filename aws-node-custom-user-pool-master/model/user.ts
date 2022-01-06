@@ -1,6 +1,7 @@
 import { EntityBase } from './base';
 import { Model, DataTypes, BuildOptions } from 'sequelize';
 import { sequelize } from './';
+import Post from './post';
 
 export interface User extends EntityBase {
     // First Name of the user
@@ -63,5 +64,7 @@ const User = < UserStatic ><unknown>sequelize.define('User', {
     }
 });
 
+User.hasMany(Post);
+Post.belongsTo(User,{foreignKey: 'userId'});
 
 export default User;
