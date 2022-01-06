@@ -1,0 +1,35 @@
+.blog{
+    display: flex;
+    flex-direction: row;
+    height: 150px;
+    width: 80vw;
+    margin: 8px;
+    &-image{
+        width: 150px;
+        border: 2px solid blue;
+    }
+    &-body{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        border: 2px solid pink;
+        justify-content: space-between;
+        &-title{
+            border: 2px solid orange;
+        }
+        &-footer{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            border: 2px solid orchid;
+            &-author{
+                border: 2px solid red;
+                height: 16px;
+            }
+            &-actions{
+                border: 2px solid black;
+            }
+        }
+
+    }
+}

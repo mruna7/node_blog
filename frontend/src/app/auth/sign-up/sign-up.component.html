@@ -1,19 +1,49 @@
-<p>sign-up works!</p>
-<form (submit)="onSignup(signupForm)" #signupForm="ngForm">
-    <label for="email"><b>Username</b></label>
-    <input type="text" ngModel #fnameInput="ngModel" [(ngModel)]="fname" placeholder="Enter First name" name="fname" id="fname" required>
 
-    <!-- <label for="email"><b>Last name</b></label>
-    <input type="text" ngModel #lnameInput="ngModel" [(ngModel)]="lname" placeholder="Enter Last name" name="lname" id="lname" required> -->
+<!-- <form (submit)="onSignup(signupForm)" #signupForm="ngForm">
+    <label for="email"><b>Username</b></label>
+    <input type="text" class="form" ngModel #fnameInput="ngModel" [(ngModel)]="fname" placeholder="Enter First name" name="fname" id="fname" required/>
+
+    <label for="email"><b>Last name</b></label>
+    <input type="text" ngModel #lnameInput="ngModel" [(ngModel)]="lname" placeholder="Enter Last name" name="lname" id="lname" required>
 
     <label for="email"><b>Email</b></label>
     <input type="text" ngModel #emailInput="ngModel" [(ngModel)]="email" placeholder="Enter Email" name="email" id="email" required>
 
-    <!-- <label for="email"><b>Mobile No.</b></label>
-    <input type="text" ngModel #mobileNoInput="ngModel" [(ngModel)]="mobileNo" placeholder="Enter mobile no" name="mobileNo" id="mobileNo" required> -->
+    <label for="email"><b>Mobile No.</b></label>
+    <input type="text" ngModel #mobileNoInput="ngModel" [(ngModel)]="mobileNo" placeholder="Enter mobile no" name="mobileNo" id="mobileNo" required>
 
     <label for="psw"><b>Password</b></label>
     <input type="password" name="password" ngModel minlength="8" #passwordInput="ngModel" [(ngModel)]="password" placeholder="Enter Password" id="psw" required>
 
     <button type="submit" class="registerbtn">Register</button>
-</form>
+</form> -->
+
+    <div class="container" style="height:500px;width:400px;align-items: center;margin:2% 35%;">
+<form (submit)="onSignup(signupForm)" #signupForm="ngForm">
+    
+      <h1>Register</h1>
+      <p>Please fill in this form to create an account.</p>
+      <hr>
+  
+      <label for="email"><b>Username</b></label>
+      <input type="text" class="form" ngModel #fnameInput="ngModel" [(ngModel)]="fname" placeholder="Enter First name" name="fname" id="fname" required/>
+       
+      <label for="email"><b>Email</b></label>
+      <input type="text" ngModel #emailInput="ngModel" [(ngModel)]="email" placeholder="Enter Email" name="email" id="email" required>
+  
+  
+      <label for="psw"><b>Password</b></label>
+      <input type="password" name="password" ngModel minlength="8" #passwordInput="ngModel" [(ngModel)]="password" placeholder="Enter Password" id="psw" required>
+  
+      <label for="psw-repeat"><b>Repeat Password</b></label>
+      <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
+      <hr>
+      <button type="submit" class="registerbtn">Register</button>
+      <div class="signin">
+        <p>Already have an account?  <a class="link" routerLink="/signin">Sign in</a>.</p>
+      </div>
+    
+    
+    
+  </form>
+  </div>
