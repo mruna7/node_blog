@@ -21,7 +21,7 @@ provider:
       Group: CEP4-A72
       Name Initials: RG
       Purpose: "Case study"
-  #vpc: ${file(vpc_setting.yml):${self:provider.stage}}
+  vpc: ${file(vpc_setting.yml):${self:provider.stage}}
 
 custom:
   config : ${file(./serverless.config.yml)}
@@ -98,5 +98,5 @@ resources:
         Ref: CognitoUserPoolClientUserPoolClient
 
 plugins:
-  - serverless-offline
   - serverless-webpack
+  - serverless-offline

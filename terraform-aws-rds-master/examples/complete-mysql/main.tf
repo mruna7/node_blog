@@ -7,7 +7,10 @@ locals {
   name   = "cep-a72-mysql"
   region = "us-east-1"
   tags = {
-    Owner       = "user"
+    Owner       = "RG"
+    CEP         = "A72"
+    Batch       = "4"
+    Purpose     = "Case study"
     Environment = "dev"
   }
 }

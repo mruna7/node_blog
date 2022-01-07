@@ -12,9 +12,20 @@ export const createdb = async (event, context) => {
         await Post.sync({ force: true, alter: true });
         console.log("3")
         await PostAction.sync({ force: true, alter: true });
+        console.log("Created")
+        return {
+          statusCode: 200,
+          headers: getResponseHeaders(),
+          body: JSON.stringify("DB created")
+      }
     }
     catch (err) {
         console.log(err);
+        return {
+          statusCode: err.statusCode ? err.statusCode : 500,
+          headers: getResponseHeaders(),
+          body: JSON.stringify(err)
+      }
       }
     
     }

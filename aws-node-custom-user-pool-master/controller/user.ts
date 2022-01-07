@@ -34,7 +34,7 @@ export async function getUserById(event: APIGatewayEvent, context: Context): Pro
 
 export async function getAllUser(event: APIGatewayEvent, context: Context): Promise<any> {
     try {
-            let user=await User.findAll({ include: Post });
+            let user=await User.findAll({ include: [Post] });
             if (!user) {
                 return {
                     statusCode: 404,

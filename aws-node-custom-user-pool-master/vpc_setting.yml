@@ -1,10 +1,12 @@
 dev:
   securityGroupIds:
-    - sg-0f0ac4f8494f13bd1
+    - sg-0a1805ac854b86745
   subnetIds:
-    - subnet-0966c1e298928cf78
-    - subnet-0f25fa3db4f749fdd
-    - subnet-0d537202df60bc510
-    - subnet-076ee4181128215dc
-    - subnet-0d34ebfcbd3d9490e
-    - subnet-08d4497cddce20f26
+    - subnet-09f03fb4c48cc51ea
+    - subnet-05128b714aa6e4712
+    - subnet-0dee5e530a20e5080
+    - subnet-091365f2db5cc1447
+    - subnet-0c10b83df606439d1
+    - subnet-04787be4240624257
+    - subnet-07d5ab64d35119bba
+    - subnet-0f6f775df6997ec7f
