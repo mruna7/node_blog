@@ -1,18 +1,10 @@
 import { EntityBase } from './base';
 import { Model, DataTypes, BuildOptions } from 'sequelize';
 import { sequelize } from './';
-import { count } from 'console';
-import { isDeepStrictEqual } from 'util';
-import { getUserById } from '../controller/user';
-import { createPoolCluster } from 'mysql2';
+import User from './user'
 
 export interface PostAction extends EntityBase {
-    // First Name of the user
-    name: string;
-    userId:string;
-    postId:string;
-    // Indicates the category of action
-    aserType: ActionType;
+    actionType: ActionType;
 
 }
 
@@ -29,11 +21,6 @@ const PostAction = < PostActionStatic ><unknown>sequelize.define('PostAction', {
     id: {
         allowNull: false,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
-        type: DataTypes.UUID
-    },
-    postId: {
-        allowNull: false,
         defaultValue: DataTypes.UUIDV4,
         type: DataTypes.UUID
     },
