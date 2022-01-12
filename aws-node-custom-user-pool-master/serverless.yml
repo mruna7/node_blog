@@ -1,8 +1,11 @@
 service: RiddhiG-cep4-a72
+	
+package:
+  excludeDevDependencies: true
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs14.x
   stage: dev
   region: us-east-1
   profile: cep
@@ -25,6 +28,11 @@ provider:
 
 custom:
   config : ${file(./serverless.config.yml)}
+  webpack:
+    includeModules:
+      forceInclude:
+        - mysql2
+        - sequelize
 
 functions:
   - ${file(serverless.functions.yml)}

@@ -7,11 +7,11 @@ import { APIGatewayEvent, Context } from 'aws-lambda';
 export const createdb = async (event, context) => {
     try {
         console.log("1")
-        await User.sync({ force: false, alter: true });
+        await User.sync({ force: true });
         console.log("2")
-        await Post.sync({ force: true, alter: true });
+        await Post.sync({ force: true });
         console.log("3")
-        await PostAction.sync({ force: true, alter: true });
+        await PostAction.sync({ force: true });
         console.log("Created")
         return {
           statusCode: 200,

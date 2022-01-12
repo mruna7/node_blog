@@ -5,12 +5,9 @@ import User from './user';
 import PostAction from './postAction';
 
 export interface Post extends EntityBase {
-    // First Name of the user
     title: string;
-    // User email id
     content: string;
     postType:string;
-    userId:string;
     img:string;
 }
 
@@ -44,11 +41,6 @@ const Post = < PostStatic ><unknown>sequelize.define('Post', {
     img: {
         type: new DataTypes.STRING(1024),
         allowNull: false
-    },
-    userId: {
-        allowNull: false,
-        defaultValue: DataTypes.UUIDV4,
-        type: DataTypes.UUID
     }
 });
 
