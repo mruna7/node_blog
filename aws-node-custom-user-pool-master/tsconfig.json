@@ -10,7 +10,12 @@
     "target": "es2017",
     "outDir": "lib"
   },
+  "include": ["config/*","controller/*","model/*","util/*","sereverless.yml","handler.ts"],
   "exclude": [
-    "node_modules"
+    "node_modules/**/*",
+    ".serverless/**/*",
+    ".webpack/**/*",
+    "_warmup/**/*",
+    ".vscode/**/*"
   ]
 }

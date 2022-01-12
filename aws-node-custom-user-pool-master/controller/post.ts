@@ -1,9 +1,10 @@
 import User from '../model/user';
 import Post from '../model/post';
+import { Sequelize } from "sequelize";
 import { getResponseHeaders } from '../util/util';
 import { APIGatewayEvent, Context } from 'aws-lambda';
 import PostAction from '../model/postAction';
-import { sequelize } from '../model';
+import { sequelize } from '../model/index';
 
 export async function getAllPost(event: APIGatewayEvent, context: Context): Promise<any> {
     
@@ -15,7 +16,7 @@ export async function getAllPost(event: APIGatewayEvent, context: Context): Prom
                   {
                      model: PostAction,
                      
-                     attributes: [[sequelize.fn('COUNT', 'postId'), 'PostCount']],
+                     attributes: [[Sequelize.fn('COUNT', 'postId'), 'PostCount']],
                      where: {
                         actionType: "like"
                      },

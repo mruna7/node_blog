@@ -18,7 +18,9 @@ export interface User extends EntityBase {
 
 export enum UserType {
     Blogger = 'Blogger',
-    Reader = 'Reader'
+    Reader = 'Reader',
+    Admin = 'Admin',
+    Public = 'Public'
 }
 
 export enum UserCurrentState {
@@ -55,7 +57,7 @@ const User = < UserStatic ><unknown>sequelize.define('User', {
     userType: {
         type: DataTypes.ENUM,
         allowNull: false,
-        values: ['Blogger', 'Reader']
+        values: ['Blogger', 'Reader','Admin','Public']
     },
     currentState: {
         type: DataTypes.ENUM,
@@ -65,6 +67,6 @@ const User = < UserStatic ><unknown>sequelize.define('User', {
 });
 
 User.hasMany(Post);
-Post.belongsTo(User,{foreignKey: 'userId'});
+Post.belongsTo(User,{targetKey: "id",foreignKey: 'userId'});
 
 export default User;

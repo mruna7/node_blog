@@ -1,8 +1,11 @@
 service: RiddhiG-cep4-a72
+	
+package:
+  excludeDevDependencies: true
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs14.x
   stage: dev
   region: us-east-1
   profile: cep
@@ -21,10 +24,15 @@ provider:
       Group: CEP4-A72
       Name Initials: RG
       Purpose: "Case study"
-  #vpc: ${file(vpc_setting.yml):${self:provider.stage}}
+  vpc: ${file(vpc_setting.yml):${self:provider.stage}}
 
 custom:
   config : ${file(./serverless.config.yml)}
+  webpack:
+    includeModules:
+      forceInclude:
+        - mysql2
+        - sequelize
 
 functions:
   - ${file(serverless.functions.yml)}
@@ -98,5 +106,5 @@ resources:
         Ref: CognitoUserPoolClientUserPoolClient
 
 plugins:
-  - serverless-offline
   - serverless-webpack
+  - serverless-offline
