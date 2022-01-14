@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BlogService } from '../blog.service';
 @Component({
   selector: 'app-create-blog',
@@ -7,57 +7,48 @@ import { BlogService } from '../blog.service';
   styleUrls: ['./create-blog.component.scss']
 })
 export class CreateBlogComponent implements OnInit {
-//  BlogPost = new FormGroup({
-//     Image:new FormControl(''),
-//     Title: new FormControl(''),
-//     Content: new FormControl(''),
-//   });
-isEdit = false;
+  //  BlogPost = new FormGroup({
+  //     Image:new FormControl(''),
+  //     Title: new FormControl(''),
+  //     Content: new FormControl(''),
+  //   });
+  isEdit = false;
   blog: any;
-  blogForm: FormGroup ;
+  blogForm: FormGroup;
   changesSubmited = false;
   isCanceled = false;
   blogTitle = new FormControl(null, [Validators.required]);
   blogContent = new FormControl(null, [Validators.required]);
-  imageUpload= new FormControl(null, [Validators.required]);
-  UserId:any= " ";
-  constructor(private blogservice:BlogService) {
+  imageUpload = new FormControl(null, [Validators.required]);
+  UserId: any = ' ';
+  constructor(private blogservice: BlogService) {
     this.blogForm = new FormGroup({
       title: this.blogTitle,
       content: this.blogContent,
-    imageUpload:this.imageUpload,
+      imageUpload: this.imageUpload
     });
-   this.UserId=sessionStorage.getItem('UserId');
-   }
-
-  ngOnInit(): void {
-   
+    this.UserId = sessionStorage.getItem('UserId');
   }
-onCancel(){
 
-}
-onEditBlog() {
+  ngOnInit(): void {}
+  onCancel() {}
+  onEditBlog() {}
+  onCreateBlog() {
+    this.changesSubmited = true;
+    let postData = {
+      title: this.blogTitle.value,
 
-}
- onCreateBlog()
- {
-  this.changesSubmited = true;
-  let postData = {
+      content: this.blogContent.value,
 
-    title : this.blogTitle.value,
+      postType: 'Blog',
 
-    content: this.blogContent.value,
+      img: this.imageUpload.value,
 
-    postType: "Blog",
-
-    img: this.imageUpload.value,
-
-    userId: this.UserId,
-
+      userId: this.UserId
     };
-  console.log(postData)
-   this.blogservice.createNewBlog(postData).subscribe((data)=>{
-    console.log(data) ;  
-  });;
- }
+    console.log(postData);
+    this.blogservice.createNewBlog(postData).subscribe(data => {
+      console.log(data);
+    });
+  }
 }

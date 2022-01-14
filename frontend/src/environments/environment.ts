@@ -6,7 +6,9 @@ export const environment = {
     production: false,
     cognitoUserPoolId:  'us-east-1_O0bloALi3',
     cognitoAppClientId: '7hauv0igkft36tipdd9iclimcp',
-    GET_USER:"https://hixqi0g738.execute-api.us-east-1.amazonaws.com/dev/getuser/"
+    GET_USER:"https://hixqi0g738.execute-api.us-east-1.amazonaws.com/dev/getuser/",
+    CREATE_POST:"https://hixqi0g738.execute-api.us-east-1.amazonaws.com/dev/createPost",
+    GET_ALL_POST:"https://hixqi0g738.execute-api.us-east-1.amazonaws.com/dev/getAllPost"
 };
 
 /*
