@@ -42,4 +42,29 @@ getAllPost:
     - http:
         method: get
         path: /getAllPost
-        
+
+deleteUserById:
+  handler: handler.deleteUserById
+  events:
+    - http:
+        method: delete
+        path: /deleteuser/{userId}
+        cors: ${self:custom.config.cors}
+        request:
+            parameters:
+              paths:
+                userId: true       
+
+createPost:
+  handler: handler.createPost
+  events:
+    - http:
+        method: post
+        path: /createPost
+
+postAction:
+  handler: handler.postAction
+  events:
+    - http:
+        method: post
+        path: /postAction

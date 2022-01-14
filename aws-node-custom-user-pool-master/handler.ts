@@ -23,7 +23,16 @@ export const createdb = async (event, _context) => {
 export const getAllUser: APIGatewayProxyHandler = async (event, _context) => {
     return await userController.getAllUser(event, _context);
 }
-
+export const deleteUserById: APIGatewayProxyHandler = async (event, _context) => {
+    return await userController.deleteUserById(event, _context);
+}
 export const getAllPost: APIGatewayProxyHandler = async (event, _context) => {
     return await postController.getAllPost(event, _context);
+}
+
+export const createPost:APIGatewayProxyHandler = async (event, _context) => {
+    return await  postController.createPost(event, _context);
+}
+export const postAction:APIGatewayProxyHandler = async (event, _context) => {
+    return await  postController.postAction(event, _context);
 }
