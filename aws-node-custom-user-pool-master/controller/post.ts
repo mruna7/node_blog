@@ -51,3 +51,65 @@ export async function getAllPost(event: APIGatewayEvent, context: Context): Prom
             };
         }
     }
+
+export async function createPost(event: APIGatewayEvent, context: Context): Promise<any> {
+
+    try {
+        const data = JSON.parse(event.body);
+        let postData = {
+        "title" : data.title,
+        "content": data.content,
+        "postType": data.postType,
+        "img": false,
+        "userId":  data.userId,
+        };
+        const x = await Post.create(postData);
+        return {
+            statusCode: 200,
+            headers: getResponseHeaders(),
+            body: JSON.stringify(x)
+        };
+    }
+    catch (err ) {
+        console.log(err);
+        return {
+            statusCode: err.statusCode ? err.statusCode : 500,
+            error: err.message ? err.message : "Not found",
+        };
+    }
+}
+
+export async function postAction(event: APIGatewayEvent, context: Context): Promise<any> {
+
+    try {
+        const data = JSON.parse(event.body);
+        let postData = {
+        "postId" : data.postId,
+        "userId": data.userId,
+        "actionType": data.actionType,
+        };
+        const project = await PostAction.findOne({ where: [{ postId:  data.postId},{ userId:  data.userId}]});
+        let result:any=[];
+        if (project === null) {
+            result= await PostAction.create(postData);
+        } else {
+            result = await PostAction.update(postData,{
+                where: {
+                  id: project.id
+                }
+              });
+        }
+        return {
+            statusCode: 200,
+            headers: getResponseHeaders(),
+            body: JSON.stringify(result)
+        };
+    }
+    catch (err ) {
+        console.log(err);
+        return {
+            statusCode: err.statusCode ? err.statusCode : 500,
+            error: err.message ? err.message : "Not found",
+        };
+    }
+}

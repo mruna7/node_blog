@@ -2,6 +2,7 @@ import { EntityBase } from './base';
 import { Model, DataTypes, BuildOptions } from 'sequelize';
 import { sequelize } from './';
 import Post from './post';
+import PostAction from './postAction';
 
 export interface User extends EntityBase {
     // First Name of the user
@@ -19,8 +20,7 @@ export interface User extends EntityBase {
 export enum UserType {
     Blogger = 'Blogger',
     Reader = 'Reader',
-    Admin = 'Admin',
-    Public = 'Public'
+    Admin = 'Admin'
 }
 
 export enum UserCurrentState {
@@ -57,7 +57,7 @@ const User = < UserStatic ><unknown>sequelize.define('User', {
     userType: {
         type: DataTypes.ENUM,
         allowNull: false,
-        values: ['Blogger', 'Reader','Admin','Public']
+        values: ['Blogger', 'Reader','Admin']
     },
     currentState: {
         type: DataTypes.ENUM,
@@ -67,6 +67,6 @@ const User = < UserStatic ><unknown>sequelize.define('User', {
 });
 
 User.hasMany(Post);
-Post.belongsTo(User,{targetKey: "id",foreignKey: 'userId'});
+Post.belongsTo(User,{targetKey: "id",foreignKey: 'UserId'});
 
 export default User;

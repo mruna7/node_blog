@@ -3,25 +3,22 @@ import { getResponseHeaders } from '../util/util';
 export const preSignUpTrigger = async (event, context) => {
     try {
       console.log('User created: User-Pool', event.userPoolId+", UserId: " + event.userName+", event:"+event);
-      context.done(null, event);
       const userCount = await User.count({ where : { email : event.request.userAttributes.email}});
-      if (userCount == 0) {
+      //if (userCount == 0) {
         let userData = {
           "id" : event.userName,
           "name": event.request.userAttributes.name,
           "email": event.request.userAttributes.email,
           "emailVerified": false,
-          "userType": event.request.userAttributes.userType,
+          "userType": event.request.userAttributes["custom:userType"],
           "currentState": "Pending"
-        };
-    
+        };    
         const x = await User.create(userData);
-      }
+     // }
   
       context.done(null, event);
       return {
         statusCode: 200,
-        headers: getResponseHeaders(),
         body: "Operation Completed"
       }
   
@@ -35,9 +32,7 @@ export const preSignUpTrigger = async (event, context) => {
   export const postConfirmationTrigger = async (event, context) => {
     try {
       console.log('User confirmed: User-Pool', event.userPoolId+", UserId: " + event.userName+", event:"+event);
-      context.done(null, event);
-      let user = await User.findOne({ where: { email: event.request.userAttributes.email } })
-  
+      let user = await User.findOne({ where: { email: event.request.userAttributes.email } })  
       if (user) {
         await user.update({
           id: event.userName,
@@ -49,7 +44,6 @@ export const preSignUpTrigger = async (event, context) => {
   
         return {
           statusCode: 200,
-          headers: getResponseHeaders(),
           body: "Operation Completed"
         }  
       } else {
