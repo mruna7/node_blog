@@ -31,6 +31,8 @@
       <label for="email"><b>Email</b></label>
       <input type="text" ngModel #emailInput="ngModel" [(ngModel)]="email" placeholder="Enter Email" name="email" id="email" required>
   
+      <label for="usertype"><b>Signup As(Enter Blogger/Reader)</b></label>
+      <input type="text" ngModel #usertypeInput="ngModel" [(ngModel)]="userType" placeholder="Enter user type" name="userType" id="userType" required>
   
       <label for="psw"><b>Password</b></label>
       <input type="password" name="password" ngModel minlength="8" #passwordInput="ngModel" [(ngModel)]="password" placeholder="Enter Password" id="psw" required>

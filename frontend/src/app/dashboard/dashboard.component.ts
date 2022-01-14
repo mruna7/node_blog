@@ -11,12 +11,12 @@ import { environment } from 'src/environments/environment';
 export class DashboardComponent implements OnInit {
 
   constructor(private router: Router) { }
-
+ 
   ngOnInit(): void {
-
+  
   }
 
   createBlog(): void {
-    // to  be written
+    this.router.navigate(["create-blog"])
   }
 }

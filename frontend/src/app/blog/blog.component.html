@@ -1,11 +1,11 @@
-<div class = "blog">
+<div class = "blog" *ngFor="let post of postArray">
     <div class = "blog-image">
          Image
     </div>
     <div class = "blog-body">
-         <div class = "blog-body-title"> Title </div>
+         <div class = "blog-body-title"> {{post.title}} </div>
          <div class = "blog-body-footer">
-             <div class = "blog-body-footer-author">Author Name</div>
+             <div class = "blog-body-footer-author">{{post.User.email}}</div>
              <div class = "blog-body-footer-actions">
                  Buttons
              </div>

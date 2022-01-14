@@ -1,7 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
+
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -13,11 +15,17 @@ export class SignInComponent implements OnInit {
   isLoading: boolean = false;
   email_address: string = "";
   password: string = "";
+  userId:string="";
+  constructor(private router: Router,private http:HttpClient) { }
 
-  constructor(private router: Router) { }
+  ngOnInit(): void { 
 
-  ngOnInit(): void { }
+  }
+  getuser(userId: string){
+    
+    return this.http.get(environment.GET_USER + userId);
 
+  }
   onSignIn(form: NgForm){
     if (form.valid) {
       this.isLoading = true;
@@ -34,8 +42,16 @@ export class SignInComponent implements OnInit {
       let userData = { Username: this.email_address, Pool: userPool };
       var cognitoUser = new CognitoUser(userData);
       cognitoUser.authenticateUser(authenticationDetails, {
-        onSuccess: (result) => {
-          this.router.navigate(["dashboard"])
+        onSuccess: async (data) => {
+          console.log(data);
+          console.log(data.getIdToken().payload['cognito:username'])
+          this.userId=data.getIdToken().payload['cognito:username'];
+          await this.getuser(this.userId).subscribe((data)=>{
+            console.log(data);
+            sessionStorage.setItem("UserId",this.userId);
+            this.router.navigate(["dashboard"])
+
+          });
         },
         onFailure: (err) => {
           alert(err.message || JSON.stringify(err));

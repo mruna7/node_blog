@@ -20,7 +20,7 @@ interface formDataInterface {
 export class SignUpComponent implements OnInit {
   isLoading:boolean = false;
   fname:string = '';
-  // lname:string = '';
+  userType:string = '';
   email:string = '';
   
   password:string = '';
@@ -42,7 +42,7 @@ export class SignUpComponent implements OnInit {
      var attributeList = [];
      let formData:formDataInterface = {
        "name": this.fname,
-      //  "surname": this.lname,
+        "custom:userType": this.userType,
        "email": this.email,
        
      }
@@ -52,6 +52,7 @@ export class SignUpComponent implements OnInit {
          Name: key,
          Value: formData[key]
        }
+       console.log(attrData)
        let attribute = new CognitoUserAttribute(attrData);
        attributeList.push(attribute)
      }
