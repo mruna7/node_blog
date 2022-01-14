@@ -29,3 +29,10 @@ export const deleteUserById: APIGatewayProxyHandler = async (event, _context) =>
 export const getAllPost: APIGatewayProxyHandler = async (event, _context) => {
     return await postController.getAllPost(event, _context);
 }
+
+export const createPost:APIGatewayProxyHandler = async (event, _context) => {
+    return await  postController.createPost(event, _context);
+}
+export const postAction:APIGatewayProxyHandler = async (event, _context) => {
+    return await  postController.postAction(event, _context);
+}

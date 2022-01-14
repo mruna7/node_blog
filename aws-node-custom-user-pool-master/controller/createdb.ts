@@ -13,12 +13,12 @@ export const createdb = async (event, context) => {
     // await Post.sync({ alter:true });
     // console.log("3")
     // await PostAction.sync({ force: true })
-    sequelize.query("SET FOREIGN_KEY_CHECKS = 0")
-      .then(function () {
-        return sequelize.sync({ force: true });
+    await sequelize.query("SET FOREIGN_KEY_CHECKS = 0")
+      .then(async function () {
+        return await sequelize.sync({ force: true });
       })
-      .then(function () {
-        return sequelize.query("SET FOREIGN_KEY_CHECKS = 1");
+      .then(async function () {
+        return await sequelize.query("SET FOREIGN_KEY_CHECKS = 1");
       })
       .then(
         function () {
