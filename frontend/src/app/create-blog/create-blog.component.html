@@ -1,0 +1,51 @@
+<h3>>>New Blog<<</h3>
+<div class="blog">
+  <!-- <form [formGroup]="BlogPost">
+
+        <label for="title">Blog title </label>
+        <input id="title" type="text" formControlName="title">
+      
+        <label for="Content">Content  </label>
+        <input id="content" type="text-area" formControlName="content">
+      
+      </form> -->
+  <form
+    [formGroup]="blogForm"
+    autocomplete="off"
+    (ngSubmit)="isEdit ? onEditBlog() : onCreateBlog()"
+  > 
+    <div class="form-group">
+        <label for="logo">Upload a cover image link for your blog</label> <br>
+        <input type="text"  name="imageUpload" id="imageUpload"
+        class="form-control"
+        formControlName="imageUpload" required />
+    </div> 
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input
+        type="text"
+        id="title"
+        class="form-control"
+        formControlName="title"
+      />
+    </div>
+    <div class="form-group">
+      <label for="content">Content:</label>
+      <textarea
+        type="text"
+        rows="15"
+        id="content"
+        class="form-control"
+        formControlName="content"
+      ></textarea>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-sm btn-success" type="submit">
+        Submit
+      </button>
+      <button class="btn btn-sm btn-warning" type="button" (click)="onCancel()">
+        Discard
+      </button>
+    </div>
+  </form>
+</div>
