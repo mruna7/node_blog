@@ -41,6 +41,11 @@ const Post = < PostStatic ><unknown>sequelize.define('Post', {
     img: {
         type: new DataTypes.STRING(1024),
         allowNull: false
+    },
+    isDeleted:{
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
 });
 
