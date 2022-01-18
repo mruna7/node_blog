@@ -1,4 +1,4 @@
-
+@import "../../../global-color.scss";
 /* Full-width input fields */
 input[type=text], input[type=password] {
   width: 100%;
@@ -6,23 +6,23 @@ input[type=text], input[type=password] {
   margin: 5px 0 15px 0;
   display: inline-block;
   border: none;
-  background: #f1f1f1;
+  background: $global-white-color;
 }
 
 input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
+  background-color:$global-white-focus-color;
   outline: none;
 }
 
 hr {
-  border: 1px solid #f1f1f1;
+  border: 1px solid $global-white-color;
   margin-bottom: 5px;
 }
 
 /* Set a style for all buttons */
 button {
-  background-color: #04AA6D;
-  color: white;
+  background-color: $primary-color;
+  color: $global-white-color;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
@@ -47,3 +47,8 @@ button {
 button:hover {
     opacity: 0.8;
   }
+.sign-up-container{
+  min-height:500px;
+  width:400px;
+  align-items: center;
+}

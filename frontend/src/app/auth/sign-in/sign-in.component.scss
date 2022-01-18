@@ -1,3 +1,4 @@
+@import "../../../global-color.scss";
 body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box}
 
@@ -8,29 +9,31 @@ input[type=email], input[type=password] {
   margin: 5px 0 22px 0;
   display: inline-block;
   border: none;
-  background: #f1f1f1;
+  background: $global-white-color;
 }
 
 input[type=email]:focus, input[type=password]:focus {
-  background-color: #ddd;
+  background-color: $global-white-focus-color;
   outline: none;
 }
 
 hr {
-  border: 1px solid #f1f1f1;
+  border: 1px solid $global-white-color;
   margin-bottom: 25px;
 }
 
 /* Set a style for all buttons */
 button {
-  background-color: #04AA6D;
-  color: white;
+  background-color: $primary-color;
+  color: $global-white-color;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
   width: 100%;
   opacity: 0.9;
+  font-weight: bold;
+  font-size: medium;
 }
 
 button:hover {
@@ -40,7 +43,7 @@ button:hover {
 /* Extra styles for the cancel button */
 .cancelbtn {
   padding: 14px 20px;
-  background-color: #f44336;
+  background-color: $secondary-color;
 }
 
 /* Float cancel and signup buttons and add an equal width */
