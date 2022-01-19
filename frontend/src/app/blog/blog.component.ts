@@ -7,7 +7,7 @@ import { BlogService } from '../blog.service';
   styleUrls: ['./blog.component.scss']
 })
 export class BlogComponent implements OnInit {
-  postArray = [
+  postArraydummy = [
     {
       id: '1',
       title: 'blog1-title',
@@ -53,13 +53,15 @@ export class BlogComponent implements OnInit {
       PostActions: [{ PostCount: 1 }]
     }
   ];
-  
+  postArray:any={};
   constructor(private blogservice:BlogService) {}
  
 
   ngOnInit(): void {
     this.blogservice.getBlogPosts().subscribe((data)=>{
-      console.log(data)
+      console.log(data);
+      this.postArray=data;
+
     });
   }
 }

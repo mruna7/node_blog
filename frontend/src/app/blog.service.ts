@@ -8,7 +8,7 @@ export class BlogService {
   constructor(private http: HttpClient) {}
   createNewBlog(blogData: any) {
     console.log(blogData, 'inside service');
-    return this.http.post(environment.CREATE_POST, blogData);
+    return this.http.put(environment.CREATE_POST,blogData);
   }
 
   getBlogPosts() {
