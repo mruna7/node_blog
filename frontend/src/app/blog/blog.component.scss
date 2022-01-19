@@ -1,35 +1,63 @@
+@import "../../global-color.scss";
+$blog-height: 150px;
 .blog{
     display: flex;
     flex-direction: row;
-    height: 150px;
+    
     width: 80vw;
-    margin: 8px;
-    &-image{
-        width: 150px;
-        border: 2px solid blue;
-    }
+    margin: 8px;   
     &-body{
-        display: flex;
         flex-direction: column;
         width: 100%;
-        border: 2px solid pink;
+        background:$global-white-color;
         justify-content: space-between;
         &-title{
-            border: 2px solid orange;
+            display: flex;
+            background: $primary-color;
+            height: $blog-height*0.2;
+            font-size: medium;
+            font-weight: bold;
+            justify-content: center;
+            align-items: center;
         }
         &-footer{
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            border: 2px solid orchid;
+            background: $neutral-dark-color;
+            height: $blog-height*0.2;
+            align-items: center;
             &-author{
-                border: 2px solid red;
-                height: 16px;
+                padding: 0 10px 0 10px;                
+                font-weight: bold;
             }
             &-actions{
-                border: 2px solid black;
+                padding: 0 10px 0 10px;
             }
         }
 
+    }
+}
+
+.content{
+    
+    &-wrapper{    
+        display: flex;    
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &-image{
+        display: flex;
+        min-height: $blog-height*0.6;
+        min-width: $blog-height*0.6;
+        justify-content: center;
+        align-items: center;
+        background: cornflowerblue;
+    }
+    &-body{
+        display: flex;
+        min-width: 40vw
+        
     }
 }
