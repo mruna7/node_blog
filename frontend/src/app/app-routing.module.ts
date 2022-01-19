@@ -7,15 +7,17 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { CreateBlogComponent } from './create-blog/create-blog.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ReadBlogComponent } from './read-blog/read-blog.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/signup', pathMatch: 'full' },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'signup', component: SignUpComponent,},
   { path: 'signin', component: SignInComponent,},
   { path: 'dashboard', component: DashboardComponent,
   // canActivate: [AuthGuard]
 },
-{ path: 'create-blog', component: CreateBlogComponent,},
+{ path: 'create-blog', component: CreateBlogComponent},
+{ path: 'read-blog/:id', component: ReadBlogComponent}
 ];
 
 @NgModule({
