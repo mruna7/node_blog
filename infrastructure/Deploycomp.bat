@@ -9,7 +9,12 @@ echo "Initializing"
 terraform init
 echo "Setting it up it will take few minutes...."
 terraform apply -var region=%region% -var logbuckname="%logbuckname%" -var buckname="%buckname%" -auto-approve
+cd ..
+cd frontend
+npm run build
 aws s3 sync ./frontend/build s3://%buckname%
+cd ..
+cd infrastructure
 echo "Processing and fixing....."
 terraform apply -var region=%region% -var logbuckname="%logbuckname%" -var buckname="%buckname%" -auto-approve
 echo "Everything is ready...."
