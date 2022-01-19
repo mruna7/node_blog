@@ -30,7 +30,7 @@ export async function getAllPost(event: APIGatewayEvent, context: Context): Prom
                    required: false
                 }        
                 ],
-                order: [ ['createdAt','DESC'] ],
+                group:['id'],
                 where: {isDeleted:false},
             });
             if (!post) {
