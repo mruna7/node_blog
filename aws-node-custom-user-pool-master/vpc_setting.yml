@@ -2,9 +2,6 @@ dev:
   securityGroupIds:
     - sg-0a1805ac854b86745
   subnetIds:
-    - subnet-09f03fb4c48cc51ea
-    - subnet-05128b714aa6e4712
-    - subnet-0dee5e530a20e5080
     - subnet-091365f2db5cc1447
     - subnet-0c10b83df606439d1
     - subnet-04787be4240624257
