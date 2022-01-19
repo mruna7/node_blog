@@ -82,3 +82,15 @@ deletePostById:
             parameters:
               paths:
                 postId: true
+
+getPostbyId:
+  handler: handler.getPostbyId
+  events:
+    - http:
+        method: get
+        path: /getPostbyId/{postId}
+        cors: ${self:custom.config.cors}
+        request:
+            parameters:
+              paths:
+                postId: true
