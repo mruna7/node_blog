@@ -59,12 +59,12 @@ createPost:
   handler: handler.createPost
   events:
     - http:
-        method: post
+        method: put
         path: /createPost
 
 postAction:
   handler: handler.postAction
   events:
     - http:
-        method: post
+        method: put
         path: /postAction

@@ -66,7 +66,7 @@ const User = < UserStatic ><unknown>sequelize.define('User', {
     }
 });
 
-User.hasMany(Post);
+User.hasMany(Post,{targetKey: "id",foreignKey: 'UserId'});
 Post.belongsTo(User,{targetKey: "id",foreignKey: 'UserId'});
 
 export default User;

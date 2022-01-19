@@ -14,21 +14,24 @@ export async function getAllPost(event: APIGatewayEvent, context: Context): Prom
                     model: User,
                   },
                   {
-                     model: PostAction,
-                     
-                     attributes: [[Sequelize.fn('COUNT', 'postId'), 'PostCount']],
-                     where: {
-                        actionType: "like"
-                     },
-                     required: false
-                  //   where: {
-                  //     school: "Woodstock Music School"
-                  //   },
-                  //   required: false
-                  }
+                    model: PostAction,
+                    attributes: [[Sequelize.fn('COUNT', 'postId'), 'likeCount']],
+                    where: {
+                       actionType: "like"
+                    },
+                    required: false
+                 },
+                 {
+                   model: PostAction,
+                   attributes: [[Sequelize.fn('COUNT', 'postId'), 'dislikeCount']],
+                   where: {
+                      actionType: "dislike"
+                   } ,
+                   required: false
+                }        
                 ],
                 group: [ 'id' ],
-                  
+                where: {isDeleted:false},
             });
             if (!post) {
                 return {
@@ -60,8 +63,9 @@ export async function createPost(event: APIGatewayEvent, context: Context): Prom
         "title" : data.title,
         "content": data.content,
         "postType": data.postType,
-        "img": false,
-        "userId":  data.userId,
+        "img": data.img,
+        "UserId":  data.userId,
+        "isDeleted":false
         };
         const x = await Post.create(postData);
         return {

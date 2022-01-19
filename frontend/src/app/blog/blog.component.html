@@ -1,14 +1,15 @@
 <div class = "blog" *ngFor="let post of postArray">
-    <div class = "blog-image">
-         Image
-    </div>
-    <div class = "blog-body">
-         <div class = "blog-body-title"> {{post.title}} </div>
-         <div class = "blog-body-footer">
-             <div class = "blog-body-footer-author">post.User.email</div>
-             <div class = "blog-body-footer-actions">
-                 Buttons
-             </div>
-         </div>
+    
+    <div class = "blog-body">        
+        <div class = "blog-body-title">Title : {{post.title}} </div>
+        <div class = "content-wrapper">
+            <div class = "content-image">Image</div>
+            <div class = "content-body">{{post.content}}</div>
+        </div>
+        
+        <div class = "blog-body-footer">
+            <div class = "blog-body-footer-author">Created by: {{post.User.email}}</div>
+            <div class = "blog-body-footer-actions">Buttons</div>
+        </div>
     </div>
 </div>
