@@ -31,7 +31,7 @@ const Post = < PostStatic ><unknown>sequelize.define('Post', {
         allowNull: false
     },
     content: {
-        type: new DataTypes.STRING(1024),
+        type: new DataTypes.TEXT,
         allowNull: false
     },
     postType: {
