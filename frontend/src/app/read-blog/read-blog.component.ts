@@ -1,15 +1,56 @@
-import { Component} from '@angular/core';
-
+import { Component, OnInit} from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { BlogService } from '../blog.service';
 @Component({
   selector: 'app-read-blog',
   templateUrl: './read-blog.component.html',
   styleUrls: ['./read-blog.component.scss']
 })
-export class ReadBlogComponent{
+export class ReadBlogComponent implements OnInit{
+  private routeSub: Subscription = new Subscription;
+  postAction: any;
+  id: any;
+ constructor(private route: ActivatedRoute,private blog:BlogService){
+   
+ }
+ public postData: any = {};
+ngOnInit(): void {
+  this.routeSub = this.route.params.subscribe((params: Params): void => {
+    const postid = params['id'];
+    this.blog.get_blog_details(postid).subscribe((data: any)=>{
+      this.postData=data;
+    })
+    console.log(postid);
+    this.id=localStorage.getItem("UserId");
+});
 
- public data: any = 
-  {"id":"20b1642c-feca-4a1b-9350-403b46db7d88","title":"test blog","content":"test lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum. lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ","postType":"Blog","img":"https://picsum.photos/200/300","isDeleted":false,"createdAt":"2022-01-19T07:06:27.000Z","updatedAt":"2022-01-19T07:06:27.000Z","UserId":"ce771b3e-9a8d-4b05-989d-c5c273fb2837",
-  "User":{"id":"ce771b3e-9a8d-4b05-989d-c5c273fb2837","name":"Mrunal Vartak","email":"mrunal.vartak@impetus.com","emailVerified":true,"userType":"Blogger","currentState":"Active","createdAt":"2022-01-19T06:31:15.000Z","updatedAt":"2022-01-19T06:31:34.000Z"},
-  "PostActions":[]}
 
+}
+
+dislikePost(postID: any){
+  console.log("dislike");
+  this.postAction={
+   "postId" : postID,
+   "userId": this.id,
+   "actionType": "dislike",
+  }
+  this.blog.dislikePost(this.postAction).subscribe((data)=>{
+   console.log(data);
+ })
+   }
+   likePost(postID:any){
+     this.postAction={
+       "postId" : postID,
+       "userId": this.id,
+       "actionType": "like",
+      }
+     this.blog.likePost(this.postAction).subscribe((data)=>{
+       console.log(data);
+     })
+  console.log("like");
+   }
+ngOnDestroy(): void {
+  this.routeSub.unsubscribe();
+}
 }

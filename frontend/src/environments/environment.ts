@@ -8,7 +8,9 @@ export const environment = {
     cognitoAppClientId: '7hauv0igkft36tipdd9iclimcp',
     GET_USER:"https://hixqi0g738.execute-api.us-east-1.amazonaws.com/dev/getuser/",
     CREATE_POST:"https://hixqi0g738.execute-api.us-east-1.amazonaws.com/dev/createPost",
-    GET_ALL_POST:"https://hixqi0g738.execute-api.us-east-1.amazonaws.com/dev/getAllPost"
+    GET_ALL_POST:"https://hixqi0g738.execute-api.us-east-1.amazonaws.com/dev/getAllPost",
+    POST_ACTION:"https://hixqi0g738.execute-api.us-east-1.amazonaws.com/dev/postAction",
+    GET_SINGLE_POST:'https://hixqi0g738.execute-api.us-east-1.amazonaws.com/dev/getPostbyId'
 };
 
 /*

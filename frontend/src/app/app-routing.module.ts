@@ -8,6 +8,7 @@ import { CreateBlogComponent } from './create-blog/create-blog.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReadBlogComponent } from './read-blog/read-blog.component';
+import { MyBlogsComponent } from './my-blogs/my-blogs.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -17,7 +18,8 @@ const routes: Routes = [
   // canActivate: [AuthGuard]
 },
 { path: 'create-blog', component: CreateBlogComponent},
-{ path: 'read-blog/:id', component: ReadBlogComponent}
+{ path: 'read-blog/:id', component: ReadBlogComponent},
+{ path: 'myblogs', component: MyBlogsComponent}
 ];
 
 @NgModule({

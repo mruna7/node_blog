@@ -49,8 +49,8 @@ $blog-height: 150px;
     }
     &-image{
         display: flex;
-        min-height: $blog-height*0.6;
-        min-width: $blog-height*0.6;
+        max-height: $blog-height;
+        max-width: $blog-height*0.6;
         justify-content: center;
         align-items: center;
         background: cornflowerblue;
@@ -58,6 +58,5 @@ $blog-height: 150px;
     &-body{
         display: flex;
         min-width: 40vw
-        
     }
 }

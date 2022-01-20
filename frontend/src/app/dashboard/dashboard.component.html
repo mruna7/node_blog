@@ -1,7 +1,7 @@
 
 <div class = "board">
 <div class = "board-create">
-    <button (click)="createBlog()">Create blog</button>
+    <button *ngIf="UserType=='Blogger'" (click)="createBlog()">Create blog</button>
 </div>
 <div class = "board-container">
      <blog>

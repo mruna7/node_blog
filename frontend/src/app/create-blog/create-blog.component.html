@@ -1,6 +1,11 @@
 <div class = "blog">
 <div class = "blog-title"><h2>New Blog</h2></div>
-<div class="blog-form">
+<div *ngIf="loader" class="d-flex justify-content-center">
+  <div  class="spinner-border text-primary loader-create" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<div *ngIf="loader" class="blog-form">
   <!-- <form [formGroup]="BlogPost">
 
         <label for="title">Blog title </label>
