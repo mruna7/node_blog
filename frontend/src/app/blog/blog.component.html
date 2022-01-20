@@ -1,6 +1,6 @@
 
-<div *ngIf="user==null">
-<div class = "blog" *ngFor="let post of postArray">
+<div *ngIf="user=='null'">
+<div  class = "blog" *ngFor="let post of postArray">
     
     <div class = "blog-body">        
         <div class = "blog-body-title">Title : {{post.title}} </div>
@@ -20,7 +20,8 @@
     </div>
 </div>
 </div>
-<div *ngIf="user">
+<div *ngIf="user!='null'">
+    
     <div class = "blog" *ngFor="let post of myblogs">
     
         <div class = "blog-body">        

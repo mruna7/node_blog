@@ -7,7 +7,7 @@ import { BlogService } from '../blog.service';
   styleUrls: ['./blog.component.scss']
 })
 export class BlogComponent implements OnInit {
-  @Input() user = ''; 
+  @Input() user :any=null; 
   postArraydummy = [
     {
       id: '1',
@@ -55,17 +55,18 @@ export class BlogComponent implements OnInit {
     }
   ];
   postArray:any={};
-  myblogs: any;
+  myblogs: any=[];
   constructor(private blogservice:BlogService) {}
  postAction:any={};
  id :any;
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    
     this.blogservice.getBlogPosts().subscribe((data:any)=>{
       console.log(data);
       this.postArray=data;
       if(this.user)
     {  this.myblogs=data.filter((x: { UserId: string; }) => x.UserId === this.user); 
-      console.log(this.myblogs)
+      console.log(this.myblogs,"myblogs")
     }
     });
     this.id=localStorage.getItem("UserId");
