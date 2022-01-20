@@ -11,6 +11,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { BlogComponent } from './blog/blog.component';
 import { CreateBlogComponent } from './create-blog/create-blog.component';
+import { ReadBlogComponent } from './read-blog/read-blog.component';
+import { MyBlogsComponent } from './my-blogs/my-blogs.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { CreateBlogComponent } from './create-blog/create-blog.component';
     HeaderComponent,
     FooterComponent,
     BlogComponent,
-    CreateBlogComponent,   
+    CreateBlogComponent,
+    ReadBlogComponent,
+    MyBlogsComponent,   
   ],
   imports: [
     BrowserModule,

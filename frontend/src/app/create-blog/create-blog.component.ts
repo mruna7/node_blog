@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BlogService } from '../blog.service';
 @Component({
   selector: 'app-create-blog',
@@ -21,19 +22,21 @@ export class CreateBlogComponent implements OnInit {
   blogContent = new FormControl(null, [Validators.required]);
   imageUpload = new FormControl(null, [Validators.required]);
   UserId: any = ' ';
-  constructor(private blogservice: BlogService) {
+  loader: boolean=false;
+  constructor(private blogservice: BlogService,private router: Router) {
     this.blogForm = new FormGroup({
       title: this.blogTitle,
       content: this.blogContent,
       imageUpload: this.imageUpload
     });
-    this.UserId = sessionStorage.getItem('UserId');
+    this.UserId = localStorage.getItem('UserId');
   }
 
   ngOnInit(): void {}
   onCancel() {}
   onEditBlog() {}
   onCreateBlog() {
+    this.loader=true
     this.changesSubmited = true;
     let postData = {
       title: this.blogTitle.value,
@@ -49,6 +52,9 @@ export class CreateBlogComponent implements OnInit {
     console.log(postData);
     this.blogservice.createNewBlog(postData).subscribe(data => {
       console.log(data);
+      
     });
+    this.loader=false;
+    this.router.navigate(["dashboard"])
   }
 }

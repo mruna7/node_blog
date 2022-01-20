@@ -46,9 +46,11 @@ export class SignInComponent implements OnInit {
           console.log(data);
           console.log(data.getIdToken().payload['cognito:username'])
           this.userId=data.getIdToken().payload['cognito:username'];
-          await this.getuser(this.userId).subscribe((data)=>{
-            console.log(data);
-            sessionStorage.setItem("UserId",this.userId);
+          await this.getuser(this.userId).subscribe((data:any)=>{
+            
+            localStorage.setItem("UserId",this.userId);
+            localStorage.setItem("UserType",data.userType);
+            localStorage.setItem("isUserLoggedin","true");
             this.router.navigate(["dashboard"])
 
           });

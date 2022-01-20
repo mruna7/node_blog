@@ -9,10 +9,14 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+userStatus:any;
+UserType:any
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+   this.userStatus= localStorage.getItem("isUserLoggedin");
+   this.UserType= localStorage.getItem("UserType");
+   console.log(this.userStatus);
   }
   onLogout(): void {
     let poolData = {
@@ -22,6 +26,7 @@ export class HeaderComponent implements OnInit {
     let userPool = new CognitoUserPool(poolData);
     let cognitoUser = userPool.getCurrentUser();
     cognitoUser?.signOut();
-    this.router.navigate(["signin"])
+    this.router.navigate(["dashboard"])
+    localStorage.setItem("isUserLoggedin","false");
   }
 }

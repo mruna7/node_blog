@@ -1,6 +1,10 @@
 <div class = "header">
     <div class = "header-title">CEP-72 Blogs</div>
-    <div class = "header-tabs"></div>
+    <div class = "header-tabs">
+        <button *ngIf="!userStatus" class="button" style="margin: 10px;" routerLink="/signup">Register</button>
+        <button  *ngIf="!userStatus" class="button" style="margin: 10px;" routerLink="/signin">Login</button>
+        <button   class="button" style="margin: 10px;" routerLink="/myblogs">My Blogs</button>
+    </div>
     <div class = "header-logout">
         <button (click)="onLogout()">Log out</button>
     </div>
