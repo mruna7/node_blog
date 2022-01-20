@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CognitoUserPool } from 'amazon-cognito-identity-js';
 import { environment } from 'src/environments/environment';
-
+@Injectable({
+  providedIn: 'root'
+})
 @Component({
   selector: 'header',
   templateUrl: './header.component.html',
@@ -18,6 +20,7 @@ UserType:any
    this.UserType= localStorage.getItem("UserType");
    console.log(this.userStatus);
   }
+  
   onLogout(): void {
     let poolData = {
       UserPoolId: environment.cognitoUserPoolId,
@@ -26,7 +29,12 @@ UserType:any
     let userPool = new CognitoUserPool(poolData);
     let cognitoUser = userPool.getCurrentUser();
     cognitoUser?.signOut();
-    this.router.navigate(["dashboard"])
-    localStorage.setItem("isUserLoggedin","false");
+    localStorage.clear();
+    this.router.navigate(["dashboard"]).then(() => {
+      window.location.reload();
+      
+      });
+    // localStorage.setItem("isUserLoggedin","false");
+    
   }
 }

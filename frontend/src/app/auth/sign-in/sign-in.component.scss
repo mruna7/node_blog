@@ -70,3 +70,8 @@ button:hover {
      width: 50%;
   }
 }
+.header-container, .footer-container , .body-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -1,5 +1,6 @@
+import { HttpBackend } from '@angular/common/http';
 import { Component, OnInit} from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BlogService } from '../blog.service';
 @Component({
@@ -11,8 +12,10 @@ export class ReadBlogComponent implements OnInit{
   private routeSub: Subscription = new Subscription;
   postAction: any;
   id: any;
- constructor(private route: ActivatedRoute,private blog:BlogService){
-   
+  UserType:any;
+  isLoggedin:any;
+ constructor(private route: ActivatedRoute,private blog:BlogService,private router:Router){
+   this.isLoggedin=localStorage.getItem('isUserLoggedin')
  }
  public postData: any = {};
 ngOnInit(): void {
@@ -23,11 +26,16 @@ ngOnInit(): void {
     })
     console.log(postid);
     this.id=localStorage.getItem("UserId");
+    this.UserType=localStorage.getItem("UserType");
 });
 
 
 }
-
+back(){
+  this.router.navigate(["dashboard"]).then(() => {
+    window.location.reload();
+    });
+} 
 dislikePost(postID: any){
   console.log("dislike");
   this.postAction={

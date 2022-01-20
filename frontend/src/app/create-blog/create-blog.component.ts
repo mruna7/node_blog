@@ -36,7 +36,7 @@ export class CreateBlogComponent implements OnInit {
   onCancel() {}
   onEditBlog() {}
   onCreateBlog() {
-    this.loader=true
+    
     this.changesSubmited = true;
     let postData = {
       title: this.blogTitle.value,
@@ -50,11 +50,19 @@ export class CreateBlogComponent implements OnInit {
       userId: this.UserId
     };
     console.log(postData);
-    this.blogservice.createNewBlog(postData).subscribe(data => {
+    this.blogservice.createNewBlog(postData).subscribe((data) => {
       console.log(data);
+      this.router.navigate(["dashboard"]).then(() => {
+        window.location.reload();
+        });
       
+    },(err)=>{
+      console.log(err)
+      this.router.navigate(["dashboard"]).then(() => {
+        window.location.reload();
+        });
     });
-    this.loader=false;
-    this.router.navigate(["dashboard"])
+    
+
   }
 }
