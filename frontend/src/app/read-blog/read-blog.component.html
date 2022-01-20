@@ -1,5 +1,8 @@
+<div class = "header-container">
+  <header></header> 
+</div>
   <div class="jumbotron">
-    <a routerLink="/dashboard" class="previous">&laquo; Back to Dashboard</a>
+    <a (click)="back()" class="previous">&laquo; Back to Dashboard</a>
     <div class="container">
         <img src="{{postData.img}}" alt="blog image"  height="200px" width="200px">
         <h1>{{postData.title}}</h1>
@@ -11,9 +14,15 @@
         </div>
         
         <!-- <span class=""><i class="fa fa-thumbs-up first-badge" style="font-size:24px" (click)="likePost(postData.id)"></i></span>
+        
           <span class="first-badge">  <i class="fa fa-thumbs-down" style="font-size:24px" (click)="dislikePost(postData.id)"></i></span> -->
-        <span class="badge first-badge"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"  (click)="likePost(postData.id)"></span>{{postData?.PostActions[0]?.likeCount}}</span>
+          <div *ngIf="!isLoggedin || isLoggedin=='false'">
+          <button disabled class="glyphicon glyphicon-thumbs-up" aria-hidden="true" >{{postData?.PostActions[0]?.likeCount}}</button>
+          <button disabled class="glyphicon glyphicon-thumbs-down" aria-hidden="true">{{postData?.PostActions[0]?.dislikeCount}}</button>
+     </div>
+          <div *ngIf="isLoggedin=='true'">
+          <span class="badge first-badge"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"  (click)="likePost(postData.id)"></span>{{postData?.PostActions[0]?.likeCount}}</span>
         <span class="badge first-badge"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"  (click)="dislikePost(postData.id)"></span>{{postData?.PostActions[0]?.dislikeCount}}</span>
-   
+   </div>
       </div>
   </div>

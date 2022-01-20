@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
-
+import { HeaderComponent } from 'src/app/header/header.component';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -16,7 +16,7 @@ export class SignInComponent implements OnInit {
   email_address: string = "";
   password: string = "";
   userId:string="";
-  constructor(private router: Router,private http:HttpClient) { }
+  constructor(private router: Router,private http:HttpClient,private head:HeaderComponent) { }
 
   ngOnInit(): void { 
 
@@ -51,7 +51,9 @@ export class SignInComponent implements OnInit {
             localStorage.setItem("UserId",this.userId);
             localStorage.setItem("UserType",data.userType);
             localStorage.setItem("isUserLoggedin","true");
-            this.router.navigate(["dashboard"])
+            this.router.navigate(["dashboard"]).then(()=>{
+              this.head.ngOnInit();
+            })
 
           });
         },

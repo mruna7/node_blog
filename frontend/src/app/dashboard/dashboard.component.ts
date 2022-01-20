@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CognitoUserPool } from 'amazon-cognito-identity-js';
 import { environment } from 'src/environments/environment';
 
@@ -11,15 +11,20 @@ import { environment } from 'src/environments/environment';
 export class DashboardComponent implements OnInit {
   UserType:any;
   userstatus:any;
-  constructor(private router: Router) {
+  constructor(private router: Router,route:ActivatedRoute) {
+    route.params.subscribe(val => {
+      this.ngOnInit();
+    });
     this.UserType=localStorage.getItem("UserType");
   console.log(this.UserType)
    }
- 
+  
+   
+  
   ngOnInit(): void {
    this.userstatus=localStorage.getItem("isUserLoggedin")
-    if(this.userstatus) 
-    localStorage.setItem("UserType","Blogger");
+    if(this.userstatus==true) 
+    { localStorage.setItem("UserType","Blogger");}
   }
 
   createBlog(): void {

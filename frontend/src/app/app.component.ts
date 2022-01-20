@@ -9,6 +9,8 @@ export class AppComponent implements OnInit{
   title = 'frontend';
   UserType:string="Guest"
    ngOnInit(): void {
+     if(!localStorage.getItem('isUserLoggedin')){
     localStorage.setItem("UserType",this.UserType);
+    localStorage.setItem("isUserLoggedin","false");}
    }
 }
