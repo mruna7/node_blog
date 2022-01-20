@@ -1,11 +1,6 @@
 provider "aws" {
   region  = var.region
 }
-resource "aws_s3_bucket" "logs" {
-  bucket = var.logbuckname
-  force_destroy = true
-  acl = "public-read"
-}
 
 resource "aws_s3_bucket" "b1" {
     bucket = var.buckname
