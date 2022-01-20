@@ -11,7 +11,7 @@ terraform apply -var region=%region% -var buckname="%buckname%" -auto-approve
 cd ..
 cd frontend
 npm run build
-aws s3 sync ./frontend/build s3://%buckname%
+aws s3 sync ./frontend/dist s3://%buckname%
 cd ..
 cd infrastructure
 echo "Processing and fixing....."
