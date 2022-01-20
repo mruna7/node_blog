@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BlogService } from '../blog.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { BlogService } from '../blog.service';
   styleUrls: ['./blog.component.scss']
 })
 export class BlogComponent implements OnInit {
+  @Input() user = ''; 
   postArraydummy = [
     {
       id: '1',
@@ -54,14 +55,41 @@ export class BlogComponent implements OnInit {
     }
   ];
   postArray:any={};
+  myblogs: any;
   constructor(private blogservice:BlogService) {}
- 
-
+ postAction:any={};
+ id :any;
   ngOnInit(): void {
-    this.blogservice.getBlogPosts().subscribe((data)=>{
+    this.blogservice.getBlogPosts().subscribe((data:any)=>{
       console.log(data);
       this.postArray=data;
-
+      if(this.user)
+    {  this.myblogs=data.filter((x: { UserId: string; }) => x.UserId === this.user); 
+      console.log(this.myblogs)
+    }
     });
+    this.id=localStorage.getItem("UserId");
   }
+//   dislikePost(postID: any){
+//  console.log("dislike");
+//  this.postAction={
+//   "postId" : postID,
+//   "userId": this.id,
+//   "actionType": "dislike",
+//  }
+//  this.blogservice.dislikePost(this.postAction).subscribe((data)=>{
+//   console.log(data);
+// })
+//   }
+//   likePost(postID:any){
+//     this.postAction={
+//       "postId" : postID,
+//       "userId": this.id,
+//       "actionType": "like",
+//      }
+//     this.blogservice.likePost(this.postAction).subscribe((data)=>{
+//       console.log(data);
+//     })
+//  console.log("like");
+//   }
 }

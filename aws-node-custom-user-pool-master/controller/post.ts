@@ -15,7 +15,7 @@ export async function getAllPost(event: APIGatewayEvent, context: Context): Prom
                   },
                   {
                     model: PostAction,
-                    attributes: [[Sequelize.fn('COUNT', 'postId'), 'likeCount']],
+                    attributes: [[Sequelize.fn('COUNT', 'PostId'), 'likeCount']],
                     where: {
                        actionType: "like"
                     },
@@ -23,7 +23,7 @@ export async function getAllPost(event: APIGatewayEvent, context: Context): Prom
                  },
                  {
                    model: PostAction,
-                   attributes: [[Sequelize.fn('COUNT', 'postId'), 'dislikeCount']],
+                   attributes: [[Sequelize.fn('COUNT', 'PostId'), 'dislikeCount']],
                    where: {
                       actionType: "dislike"
                    } ,
@@ -88,12 +88,12 @@ export async function postAction(event: APIGatewayEvent, context: Context): Prom
     try {
         const data = JSON.parse(event.body);
         let postData = {
-        "postId" : data.postId,
+        "PostId" : data.postId,
         "userId": data.userId,
         "actionType": data.actionType,
         };
-        const project = await PostAction.findOne({ where: [{ postId:  data.postId},{ userId:  data.userId}]});
-        let result:any=[];
+        const project = await PostAction.findOne({ where: [{ PostId:  data.postId},{ userId:  data.userId}]});
+         let result:any=[];
         if (project === null) {
             result= await PostAction.create(postData);
         } else {
@@ -156,7 +156,7 @@ export async function getPostbyId(event: APIGatewayEvent, context: Context): Pro
                   },
                   {
                     model: PostAction,
-                    attributes: [[Sequelize.fn('COUNT', 'postId'), 'likeCount']],
+                    attributes: [[Sequelize.fn('COUNT', 'PostId'), 'likeCount']],
                     where: {
                        actionType: "like"
                     },
@@ -164,7 +164,7 @@ export async function getPostbyId(event: APIGatewayEvent, context: Context): Pro
                  },
                  {
                    model: PostAction,
-                   attributes: [[Sequelize.fn('COUNT', 'postId'), 'dislikeCount']],
+                   attributes: [[Sequelize.fn('COUNT', 'PostId'), 'dislikeCount']],
                    where: {
                       actionType: "dislike"
                    } ,

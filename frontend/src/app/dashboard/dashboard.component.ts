@@ -9,11 +9,17 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
-  constructor(private router: Router) { }
+  UserType:any;
+  userstatus:any;
+  constructor(private router: Router) {
+    this.UserType=localStorage.getItem("UserType");
+  console.log(this.UserType)
+   }
  
   ngOnInit(): void {
-  
+   this.userstatus=localStorage.getItem("isUserLoggedin")
+    if(this.userstatus) 
+    localStorage.setItem("UserType","Blogger");
   }
 
   createBlog(): void {
