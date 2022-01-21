@@ -8,7 +8,7 @@ export class BlogService {
   constructor(private http: HttpClient) {}
   createNewBlog(blogData: any) {
     console.log(blogData, 'inside service');
-    return this.http.put(environment.CREATE_POST,blogData);
+    return this.http.post(environment.CREATE_POST,blogData);
   }
   get_blog_details(id:string){
 
@@ -19,9 +19,12 @@ export class BlogService {
     return this.http.get(environment.GET_ALL_POST);
   }
   dislikePost(action:any){
-   return this.http.put(environment.POST_ACTION,action);
+   return this.http.post(environment.POST_ACTION,action);
   }
   likePost(action:any){
-    return this.http.put(environment.POST_ACTION,action);
+    return this.http.post(environment.POST_ACTION,action);
+  }
+  deletePost(id:any){
+    return this.http.delete(environment.DELETE_POST+id);
   }
 }

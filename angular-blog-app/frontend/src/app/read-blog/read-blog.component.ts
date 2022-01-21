@@ -45,9 +45,10 @@ dislikePost(postID: any){
   }
   this.blog.dislikePost(this.postAction).subscribe((data)=>{
    console.log(data);
+   this.ngOnInit();
  })
    }
-   likePost(postID:any){
+likePost(postID:any){
      this.postAction={
        "postId" : postID,
        "userId": this.id,
@@ -55,6 +56,7 @@ dislikePost(postID: any){
       }
      this.blog.likePost(this.postAction).subscribe((data)=>{
        console.log(data);
+       this.ngOnInit();
      })
   console.log("like");
    }

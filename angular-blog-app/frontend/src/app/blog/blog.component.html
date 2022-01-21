@@ -15,6 +15,7 @@
                 <!-- <i class="fa fa-thumbs-up" style="font-size:24px" (click)="likePost(post.id)"></i>
                 <i class="fa fa-thumbs-down" style="font-size:24px" (click)="dislikePost(post.id)"></i> -->
                 <button class="btn-success"  routerLink="/read-blog/{{post.id}}">Read More</button>
+
             </div>
         </div>
     </div>
@@ -37,6 +38,7 @@
                     <!-- <i class="fa fa-thumbs-up" style="font-size:24px" (click)="likePost(post.id)"></i>
                     <i class="fa fa-thumbs-down" style="font-size:24px" (click)="dislikePost(post.id)"></i> -->
                     <button class="btn-success"  routerLink="/read-blog/{{post.id}}">Read More</button>
+                    <button class="btn-success" (click)="deletePost(post.id)" >Delete </button>
                 </div>
             </div>
         </div>

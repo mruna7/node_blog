@@ -7,5 +7,6 @@ export const environment = {
   CREATE_POST:base_url +"createPost",
   GET_ALL_POST:base_url +"getAllPost",
   POST_ACTION:base_url +"postAction",
-  GET_SINGLE_POST:base_url +"getPostbyId"
+  GET_SINGLE_POST:base_url +"getPostbyId",
+  DELETE_POST:base_url+"deletePost/"
 };
