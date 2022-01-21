@@ -49,6 +49,7 @@ const Post = < PostStatic ><unknown>sequelize.define('Post', {
     }
 });
 
-Post.hasMany(PostAction);
+Post.hasMany(PostAction,{as : 'likeCount'});
+Post.hasMany(PostAction,{as : 'dislikeCount '});
 
 export default Post;

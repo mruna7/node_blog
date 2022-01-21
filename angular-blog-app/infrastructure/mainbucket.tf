@@ -1,5 +1,6 @@
 provider "aws" {
   region  = var.region
+  profile="cep"
 }
 
 resource "aws_s3_bucket" "b1" {
