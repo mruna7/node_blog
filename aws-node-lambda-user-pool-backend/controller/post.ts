@@ -15,7 +15,8 @@ export async function getAllPost(event: APIGatewayEvent, context: Context): Prom
                   },
                   {
                     model: PostAction,
-                    attributes: [[Sequelize.fn('COUNT', 'PostId'), 'likeCount']],
+                    as:'likeCount',
+                    attributes: [[Sequelize.fn('COUNT', 'PostId'), 'count']],
                     where: {
                        actionType: "like"
                     },
@@ -23,7 +24,8 @@ export async function getAllPost(event: APIGatewayEvent, context: Context): Prom
                  },
                  {
                    model: PostAction,
-                   attributes: [[Sequelize.fn('COUNT', 'PostId'), 'dislikeCount']],
+                   as:'dislikeCount',
+                   attributes: [[Sequelize.fn('COUNT', 'PostId'), 'count']],
                    where: {
                       actionType: "dislike"
                    } ,
@@ -156,7 +158,8 @@ export async function getPostbyId(event: APIGatewayEvent, context: Context): Pro
                   },
                   {
                     model: PostAction,
-                    attributes: [[Sequelize.fn('COUNT', 'PostId'), 'likeCount']],
+                    as:'likeCount',
+                    attributes: [[Sequelize.fn('COUNT', 'PostId'), 'count']],
                     where: {
                        actionType: "like"
                     },
@@ -164,7 +167,8 @@ export async function getPostbyId(event: APIGatewayEvent, context: Context): Pro
                  },
                  {
                    model: PostAction,
-                   attributes: [[Sequelize.fn('COUNT', 'PostId'), 'dislikeCount']],
+                   as:'dislikeCount',
+                   attributes: [[Sequelize.fn('COUNT', 'PostId'), 'count']],
                    where: {
                       actionType: "dislike"
                    } ,
