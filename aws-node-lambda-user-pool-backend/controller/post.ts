@@ -94,17 +94,15 @@ export async function postAction(event: APIGatewayEvent, context: Context): Prom
         "userId": data.userId,
         "actionType": data.actionType,
         };
-        const project = await PostAction.findOne({ where: [{ PostId:  data.postId},{ userId:  data.userId}]});
+        const project = await PostAction.findOne({ where: { PostId:  data.postId, userId:  data.userId}});
+        console.log("project",project)
          let result:any=[];
-        if (project === null) {
+        if (!project) {
             result= await PostAction.create(postData);
         } else {
-            result = await PostAction.update(postData,{
-                where: {
-                  id: project.id
-                }
-              });
+            result = await project.update(postData);
         }
+        console.log("result",result)
         return {
             statusCode: 200,
             headers: getResponseHeaders(),
@@ -177,6 +175,32 @@ export async function getPostbyId(event: APIGatewayEvent, context: Context): Pro
                 ],
                 where: {isDeleted:false},
             });
+            if (!post) {
+                return {
+                    statusCode: 404,
+                    headers: getResponseHeaders(),
+                    error: JSON.stringify({ message: "Not found" })
+                };
+            }
+            return {
+                statusCode: 200,
+                headers: getResponseHeaders(),
+                body: JSON.stringify(post)
+            };
+        }
+        catch (err ) {
+            console.log(err);
+            return {
+                statusCode: err.statusCode ? err.statusCode : 500,
+                error: err.message ? err.message : "Not found",
+            };
+        }
+    }
+
+export async function getAllPostAction(event: APIGatewayEvent, context: Context): Promise<any> {
+
+    try {
+            let post=await PostAction.findAll();
             if (!post) {
                 return {
                     statusCode: 404,

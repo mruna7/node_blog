@@ -43,6 +43,13 @@ getAllPost:
         method: get
         path: /getAllPost
 
+getAllPostAction:
+  handler: handler.getAllPostAction
+  events:
+    - http:
+        method: get
+        path: /getAllPostAction
+
 deleteUserById:
   handler: handler.deleteUserById
   events:

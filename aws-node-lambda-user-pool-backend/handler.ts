@@ -44,3 +44,7 @@ export const deletePostById: APIGatewayProxyHandler = async (event, _context) =>
 export const getPostbyId: APIGatewayProxyHandler = async (event, _context) => {
     return await postController.getPostbyId(event, _context);
 }
+
+export const getAllPostAction: APIGatewayProxyHandler = async (event, _context) => {
+    return await postController.getAllPostAction(event, _context);
+}
