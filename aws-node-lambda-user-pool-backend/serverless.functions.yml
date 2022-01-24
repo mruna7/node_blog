@@ -43,13 +43,6 @@ getAllPost:
         method: get
         path: /getAllPost
 
-getAllPostAction:
-  handler: handler.getAllPostAction
-  events:
-    - http:
-        method: get
-        path: /getAllPostAction
-
 deleteUserById:
   handler: handler.deleteUserById
   events:
@@ -61,6 +54,13 @@ deleteUserById:
             parameters:
               paths:
                 userId: true       
+        authorizer:
+          name: authorizer
+          type: COGNITO_USER_POOLS
+          arn:
+            Fn::GetAtt:
+                - CognitoUserPoolUserPool
+                - Arn
 
 createPost:
   handler: handler.createPost
@@ -69,6 +69,13 @@ createPost:
         method: post
         path: /createPost
         cors: ${self:custom.config.cors}
+        authorizer:
+          name: authorizer
+          type: COGNITO_USER_POOLS
+          arn:
+            Fn::GetAtt:
+                - CognitoUserPoolUserPool
+                - Arn
 
 postAction:
   handler: handler.postAction
@@ -77,6 +84,13 @@ postAction:
         method: post
         path: /postAction
         cors: ${self:custom.config.cors}
+        authorizer:
+          name: authorizer
+          type: COGNITO_USER_POOLS
+          arn:
+            Fn::GetAtt:
+                - CognitoUserPoolUserPool
+                - Arn
 
 deletePostById:
   handler: handler.deletePostById
@@ -89,7 +103,14 @@ deletePostById:
             parameters:
               paths:
                 postId: true
-
+        authorizer:
+          name: authorizer
+          type: COGNITO_USER_POOLS
+          arn:
+            Fn::GetAtt:
+                - CognitoUserPoolUserPool
+                - Arn
+                
 getPostbyId:
   handler: handler.getPostbyId
   events:
