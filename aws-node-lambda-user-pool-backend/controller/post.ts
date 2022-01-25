@@ -94,17 +94,15 @@ export async function postAction(event: APIGatewayEvent, context: Context): Prom
         "userId": data.userId,
         "actionType": data.actionType,
         };
-        const project = await PostAction.findOne({ where: [{ PostId:  data.postId},{ userId:  data.userId}]});
+        const project = await PostAction.findOne({ where: { PostId:  data.postId, userId:  data.userId}});
+        console.log("project",project)
          let result:any=[];
-        if (project === null) {
+        if (!project) {
             result= await PostAction.create(postData);
         } else {
-            result = await PostAction.update(postData,{
-                where: {
-                  id: project.id
-                }
-              });
+            result = await project.update(postData);
         }
+        console.log("result",result)
         return {
             statusCode: 200,
             headers: getResponseHeaders(),
