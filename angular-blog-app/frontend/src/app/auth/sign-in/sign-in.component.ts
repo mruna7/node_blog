@@ -43,7 +43,7 @@ export class SignInComponent implements OnInit {
       var cognitoUser = new CognitoUser(userData);
       cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: async (data) => {
-          let tokens= data.getAccessToken().getJwtToken();
+          let tokens= data.getIdToken().getJwtToken();
            localStorage.setItem("token",tokens)
           console.log(data);
           console.log(data.getIdToken().payload['cognito:username'])
