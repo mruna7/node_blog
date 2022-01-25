@@ -8,7 +8,9 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
 
   constructor() { }
-
+   getToken() {
+     return localStorage.getItem('token');
+  }
   isLoggedIn(): boolean {
     var isAuth = false;
 
