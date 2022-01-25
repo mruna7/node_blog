@@ -71,26 +71,10 @@ export class BlogComponent implements OnInit {
     });
     this.id=localStorage.getItem("UserId");
   }
-//   dislikePost(postID: any){
-//  console.log("dislike");
-//  this.postAction={
-//   "postId" : postID,
-//   "userId": this.id,
-//   "actionType": "dislike",
-//  }
-//  this.blogservice.dislikePost(this.postAction).subscribe((data)=>{
-//   console.log(data);
-// })
-//   }
-//   likePost(postID:any){
-//     this.postAction={
-//       "postId" : postID,
-//       "userId": this.id,
-//       "actionType": "like",
-//      }
-//     this.blogservice.likePost(this.postAction).subscribe((data)=>{
-//       console.log(data);
-//     })
-//  console.log("like");
-//   }
+  deletePost(id:any)
+  {
+    this.blogservice.deletePost(id).subscribe((data)=>{
+       this.ngOnInit();
+    })
+  }
 }
