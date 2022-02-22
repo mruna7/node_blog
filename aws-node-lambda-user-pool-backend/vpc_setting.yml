@@ -1,7 +1,0 @@
-dev:
-  securityGroupIds:
-    - sg-0a1805ac854b86745
-  subnetIds:
-    - subnet-091365f2db5cc1447
-    - subnet-0c10b83df606439d1
-    - subnet-0f6f775df6997ec7f
